@@ -2,39 +2,38 @@
 
 /*****************
 
-Circle Eater
-Pippin Barr
+Title of Project
+Author Name
 
-A simple game in which the player controls a shrinking circle with their mouse and tries
-to overlap another circle (food) in order to grow bigger.
+This is a template. You must fill in the title,
+author, and this description to match your project!
 
 ******************/
+let avatarScore = 0;
+let tx;
+let ty;
 
-// Constants defining key quantities
-const AVATAR_SIZE_GAIN = 50;
-const AVATAR_SIZE_LOSS = 1;
-
-// Avatar is an object defined by its properties
 let avatar = {
   x: 0,
   y: 0,
-  maxSize: 64,
-  size: 64,
-  active: true,
-  color: '#cccc55'
-}
+  currentSize:75,
+  maxSize:75,
+  active:true,
+  color:'#D2A69F'
+};
 
-// Food is an object defined by its properties
-let food = {
-  x: 0,
-  y: 0,
-  size: 64,
-  color: '#55cccc'
-}
+let chaiTea = {
+  x:0,
+  y:0,
+  vx:0,
+  vy:0,
+  currentSize:100,
+  color:'#E5B260'
+};
 
 // preload()
 //
-// Not needed
+// Description of preload
 
 function preload() {
 
@@ -43,93 +42,103 @@ function preload() {
 
 // setup()
 //
-// Create the canvas, position the food, remove the cursor
+// Description of setup
 
 function setup() {
-  createCanvas(windowWidth,windowHeight);
-  positionFood();
+  createCanvas(1000,500);
+  background(0);
+  chaiTea.x = random(0,width);
+  chaiTea.y = random(0,height);
+
   noCursor();
 }
 
 
 // draw()
 //
-// Move the avatar, check for collisions, display avatar and food
+// Description of draw()
 
 function draw() {
-  // Make sure the avatar is still alive - if not, we don't run
-  // the rest of the draw loop
-  if (!avatar.active) {
-    // By using "return" the draw() function exits immediately
-    return;
-  }
+  ellipseMode(CENTER);
 
-  // Otherwise we handle the game
   background(0);
-  updateAvatar();
-  checkCollision();
-  displayAvatar();
-  displayFood();
-}
-
-// updateAvatar()
-//
-// Set the position to the mouse location
-// Shrink the avatar
-// Set it to inactive if it reaches a size of zero
-function updateAvatar() {
   avatar.x = mouseX;
   avatar.y = mouseY;
-  // Shrink the avatar and use constrain() to keep it to reasonable bounds
-  avatar.size = constrain(avatar.size - AVATAR_SIZE_LOSS,0,avatar.maxSize);
-  if (avatar.size === 0) {
+
+
+
+  if (avatar.active === true){
+
+    updateChaiTea();
+    updateAvatar();
+    displayChaiTea();
+    checkTeaConsumption();
+
+    push();
+    noStroke();
+    fill(avatar.color);
+    ellipse(avatar.x,avatar.y,avatar.currentSize,avatar.currentSize);
+    pop();
+  }
+}
+
+function displayChaiTea() {
+  push();
+  noStroke();
+  fill(chaiTea.color);
+  ellipse(chaiTea.x,chaiTea.y,chaiTea.currentSize,chaiTea.currentSize);
+  pop();
+}
+
+function checkTeaConsumption() {
+  let d = dist(avatar.x,avatar.y,chaiTea.x,chaiTea.y);
+
+  if (d < avatar.currentSize/2 + chaiTea.currentSize/2) {
+    avatarScore += 1;
+    console.log(avatarScore);
+    console.log(avatar.currentSize);
+
+    avatar.currentSize = constrain(avatar.currentSize + 35,0,avatar.maxSize);
+    chaiTea.x = random(0,width);
+    chaiTea.y = random(0,height);
+  }
+}
+
+function updateAvatar() {
+  avatar.currentSize = constrain(avatar.currentSize,0,avatar.maxSize);
+
+  if (avatar.currentSize > 0) {
+  avatar.currentSize -= 0.25;
+  }
+  else {
     avatar.active = false;
+    console.log('no chai tea for u ;-;')
+    }
+}
+
+function updateChaiTea() {
+  tx += 0.03;
+  ty += 0.03;
+
+  chaiTea.x = width * noise(tx);
+  chaiTea.y = height * noise(ty);
+
+console.log(chaiTea.x)
+
+  if (chaiTea.x < 0) {
+    chaiTea.x += width;
   }
-}
 
-// checkCollision()
-//
-// Calculate distance of avatar to food
-// Check if the distance is small enough to be an overlap of the two circles
-// If so, grow the avatar and reposition the food
-function checkCollision() {
-  let d = dist(avatar.x,avatar.y,food.x,food.y);
-  if (d < avatar.size/2 + food.size/2) {
-    avatar.size = constrain(avatar.size + AVATAR_SIZE_GAIN,0,avatar.maxSize);
-    positionFood();
+  if (chaiTea.x > 0) {
+    chaiTea.x -= width;
   }
-}
 
-// displayAvatar()
-//
-// Draw the avatar in its current position, using its size and color
-// Use push() and pop() around it all to avoid affecting the rest of the program
-// with drawing commands
-function displayAvatar() {
-  push();
-  noStroke();
-  fill(avatar.color);
-  ellipse(avatar.x,avatar.y,avatar.size);
-  pop();
-}
+  if (chaiTea.y < 0) {
+    chaiTea.y -= height;
+  }
 
-// displayFood()
-//
-// Draw the food in its current position, using its size and color
-// Use push() and pop() around it all to avoid affecting the rest of the program
-// with drawing commands
-function displayFood() {
-  push();
-  noStroke();
-  fill(food.color);
-  ellipse(food.x,food.y,food.size);
-  pop();
-}
+  if (chaiTea.y > 0) {
+    chaiTea.y += height;
+  }
 
-// positionFood()
-//
-// Set the food's position properties to random numbers within the canvas dimensions
-function positionFood() {
-  food.x = random(0,width);
-  food.y = random(0,height);
 }
