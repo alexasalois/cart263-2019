@@ -10,8 +10,6 @@ author, and this description to match your project!
 
 ******************/
 let avatarScore = 0;
-let tx;
-let ty;
 
 let avatar = {
   x: 0,
@@ -27,6 +25,8 @@ let chaiTea = {
   y:0,
   vx:0,
   vy:0,
+  maxSpeed: 20,
+  minSpeed: 2,
   currentSize:100,
   color:'#E5B260'
 };
@@ -36,7 +36,6 @@ let chaiTea = {
 // Description of preload
 
 function preload() {
-
 }
 
 
@@ -49,6 +48,9 @@ function setup() {
   background(0);
   chaiTea.x = random(0,width);
   chaiTea.y = random(0,height);
+
+  chaiTea.vx = random(chaiTea.minSpeed,chaiTea.maxSpeed);
+  chaiTea.vy = random(chaiTea.minSpeed,chaiTea.maxSpeed);
 
   noCursor();
 }
@@ -64,8 +66,6 @@ function draw() {
   background(0);
   avatar.x = mouseX;
   avatar.y = mouseY;
-
-
 
   if (avatar.active === true){
 
@@ -95,8 +95,11 @@ function checkTeaConsumption() {
 
   if (d < avatar.currentSize/2 + chaiTea.currentSize/2) {
     avatarScore += 1;
-    console.log(avatarScore);
-    console.log(avatar.currentSize);
+    console.log("You drank "+avatarScore+" chai teas.");
+
+    chaiTea.vx = random(chaiTea.minSpeed,chaiTea.maxSpeed);
+    chaiTea.vy = random(chaiTea.minSpeed,chaiTea.maxSpeed);
+
 
     avatar.currentSize = constrain(avatar.currentSize + 35,0,avatar.maxSize);
     chaiTea.x = random(0,width);
@@ -117,28 +120,15 @@ function updateAvatar() {
 }
 
 function updateChaiTea() {
-  tx += 0.03;
-  ty += 0.03;
+  chaiTea.x += chaiTea.vx;
+  chaiTea.y += chaiTea.vy;
 
-  chaiTea.x = width * noise(tx);
-  chaiTea.y = height * noise(ty);
 
-console.log(chaiTea.x)
-
-  if (chaiTea.x < 0) {
-    chaiTea.x += width;
+  if (chaiTea.x < 0 || chaiTea.x > width) {
+    chaiTea.vx = -chaiTea.vx;
   }
 
-  if (chaiTea.x > 0) {
-    chaiTea.x -= width;
+  if (chaiTea.y < 0 || chaiTea.y > height) {
+    chaiTea.vy = -chaiTea.vy;
   }
-
-  if (chaiTea.y < 0) {
-    chaiTea.y -= height;
-  }
-
-  if (chaiTea.y > 0) {
-    chaiTea.y += height;
-  }
-
 }
