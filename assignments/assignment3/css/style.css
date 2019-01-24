@@ -31,3 +31,42 @@ div {
   background-color: transparent;
   color: red
 }
+
+.found {
+  background-color: yellow;
+  color: blue;
+  opacity: 1;
+}
+
+.secret {
+  opacity: 0;
+}
+
+.hidden {
+  position: absolute;
+}
+
+#text1 {
+  top: 95%;
+  left: 10%;
+}
+
+#text2 {
+  top: 10%;
+  left: 55%;
+}
+
+#text3 {
+  top: 85%;
+  left:50%;
+}
+
+#text4 {
+  top: 40%;
+  left: 70%;
+}
+
+#text5 {
+  top: 7%;
+  left: 5%;
+}
