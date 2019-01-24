@@ -46,6 +46,12 @@ div {
   position: absolute;
 }
 
+#score {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+}
+
 #text1 {
   top: 95%;
   left: 10%;

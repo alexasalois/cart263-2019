@@ -13,14 +13,11 @@ function preload() {
 function setup() {
   setInterval(update,500);
   $('span').on('click',spanClicked);
-  $('secret').on('mouseover',revealSecrets);
-
-  
-
+  $('.secret').on('mouseover',revealSecrets);
 }
 
 function revealSecrets() {
-  $(this).removeClass('secrets');
+  $(this).removeClass('secret');
   $(this).addClass('found');
 }
 
@@ -46,4 +43,6 @@ function spanClicked() {
 //
 
 function draw() {
+  secretsFound = $(".found").length;
+  $("#score").html("You found "+secretsFound+" secrets...");
 }
