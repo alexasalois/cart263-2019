@@ -21,17 +21,15 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   avatar = new Avatar(mouseX,mouseY,100,0.35);
 
-  for (var i = 0; i < 30; i++) {
+  for (var i = 0; i < 25; i++) {
     manyFood.push(new Food(random(0,width),random(0,height),10,100,random(5,20),random(5,20),10));
+    }
   }
-
-  //food = new Food(random(0,width),random(0,height),10,100,random(5,20),random(5,20),10);
-}
 
 function draw() {
  background('#0800F5');
 
- for (var i = 0; i < 30; i++) {
+ for (var i = 0; i < 25; i++) {
     manyFood[i].update();
     manyFood[i].display();
 
@@ -42,5 +40,4 @@ function draw() {
 
  avatar.update();
  avatar.display();
-
 }
