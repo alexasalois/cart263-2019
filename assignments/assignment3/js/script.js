@@ -1,37 +1,39 @@
 "use strict";
 
-$(document).ready(function () {
-  let $divs = $('div');
-  $divs.hide();
-  $divs.fadeIn(2000);
-});
+$(document).ready(setup);
 // will run when code is ready...
 
-/*****************
-******************/
-
-// preload()
-//
-// Description of preload
-
 function preload() {
-
 }
 
-
-// setup()
 //
-// Description of setup
 
 function setup() {
+  setInterval(update,500);
+  $('span').on('click',spanClicked);
+}
 
+//
+
+function update() {
+  $('span').each(updateSpan);
+}
+
+function updateSpan() {
+  let rNumber = Math.random();
+  if (rNumber < 0.05) {
+    $(this).removeClass('redacted');
+    $(this).addClass('revealed');
+  }
+}
+
+function spanClicked() {
+  $(this).removeClass('revealed');
+  $(this).addClass('redacted');
 }
 
 
-// draw()
 //
-// Description of draw()
 
 function draw() {
-
 }
