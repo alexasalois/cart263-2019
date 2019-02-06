@@ -1,0 +1,47 @@
+/* Style Sheet */
+
+* {
+  background-color: black;
+  color: white;
+  font-family: 'Geostar Fill', cursive;
+  align-items: center;
+  justify-content: center;
+}
+
+.section1 {
+  position: absolute;
+}
+
+.draggables {
+  position: absolute;
+}
+
+#computerPerson {
+  top: 80%;
+  left: 50%;
+}
+
+#drag1 {
+  top: 65%;
+  left: 20%;
+}
+
+#drag2 {
+  top: 65%;
+  left: 50%;
+}
+
+#drag3 {
+  top: 65%;
+  left: 80%;
+}
+
+#drag4 {
+  top: 55%;
+  left: 35%;
+}
+
+#drag5 {
+  top: 55%;
+  left: 65%;
+}
