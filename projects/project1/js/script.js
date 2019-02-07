@@ -11,7 +11,7 @@ trying without succeeding.
 "use strict"
 
 let $dragInspiration;
-let $recieveInspiration;
+let $receiveInspiration;
 let scoreIdeas = 0;
 let scoreTypos = 0;
 let scoreScript = 0;
@@ -31,18 +31,26 @@ function preload() {
 // prepare the code to run
 function setup() {
   $dragInspiration = $(".draggables");
-  $recieveInspiration = $("#computerPerson");
+  $receiveInspiration = $("#computerPerson");
 
   $dragInspiration.draggable({ revert: true });
-  $recieveInspiration.droppable({ drop: retain });
+  $receiveInspiration.droppable({ drop: retain });
 
 
 
 }
 
 function retain( event, ui) {
+  // Create variable to store the different drag IDs
   idActive = ui.draggable[0].id;
 
+  // Animate the person typing with an interval
+  let typeInterval = setInterval(typingComputer, 100);
+  setTimeout(function() {
+  clearInterval(typeInterval);
+  },2000);
+
+  // Calculate the score for each object
   if (idActive == "drag5") {
     scoreInteraction += 1;
   }
@@ -63,6 +71,15 @@ function retain( event, ui) {
     scoreIdeas += 1;
   }
 }
+
+function typingComputer() {
+  if ($receiveInspiration.attr("src") == "assets/images/personWaiting.png") {
+        $receiveInspiration.attr("src", "assets/images/personTyping.png");
+      }
+      else {$receiveInspiration.attr("src", "assets/images/personWaiting.png");
+      }
+}
+
 
 // what the software will run continuously
 function draw() {
