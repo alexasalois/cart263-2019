@@ -14,7 +14,6 @@
     <link href="https://fonts.googleapis.com/css?family=Geostar+Fill|Iceland|Yesteryear" rel="stylesheet">
 
 
-
     <!-- My script(s) -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -26,10 +25,20 @@
       integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
       crossorigin="anonymous"></script>
 
-  <script src="js/script.js"></script>
+    <script src="js/script.js"></script>
+
   </head>
 
   <body>
+
+    <audio class="audios" id="typingSound" controls preload="none">
+       <source src="assets/sounds/typing.wav" type="audio/wav">
+    </audio>
+
+    <audio class="audios" id="backgroundMusic" controls preload="none" autoplay loop>
+       <source src="assets/sounds/backgroundMusic.mp3" type="audio/mp3">
+    </audio>
+
     <img id="computerPerson" src="assets/images/personWaiting.png">
     <div class="draggables" id="drag1">Good ideas</div>
     <div class="draggables" id="drag2">Zero typos</div>

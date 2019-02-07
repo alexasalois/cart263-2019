@@ -20,8 +20,25 @@ body {
   font-family: 'Iceland', cursive;
 }
 
+.ui-dialog-title {
+  color: red;
+}
+
+#first {
+  background: black;
+  color: white;
+  }
+
 #stats {
   line-height: 50px;
+}
+
+#typingSound {
+  display: none;
+}
+
+#backgroundMusic {
+  display: none;
 }
 
 #computerPerson {
