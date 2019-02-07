@@ -2,6 +2,7 @@
 
 * {
   background-color: black;
+  z-index: -100;
   color: white;
   font-family: 'Press Start 2P', cursive;
   align-items: center;

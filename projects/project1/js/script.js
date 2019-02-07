@@ -36,15 +36,15 @@ function setup() {
   $dragInspiration.draggable({ revert: true });
   $receiveInspiration.droppable({ drop: retain });
 
-
-
+  // display original stats
+  updateStats();
 }
 
 function retain( event, ui) {
   // Create variable to store the different drag IDs
   idActive = ui.draggable[0].id;
 
-  // Animate the person typing with an interval
+  // Set an interval for the typing animation
   let typeInterval = setInterval(typingComputer, 100);
   setTimeout(function() {
   clearInterval(typeInterval);
@@ -53,25 +53,31 @@ function retain( event, ui) {
   // Calculate the score for each object
   if (idActive == "drag5") {
     scoreInteraction += 1;
+    updateStats();
   }
 
   if (idActive == "drag4") {
     scoreVisuals += 1;
+    updateStats();
   }
 
   if (idActive == "drag3") {
     scoreScript += 1;
+    updateStats();
   }
 
   if (idActive == "drag2") {
     scoreTypos += 1;
+    updateStats();
   }
 
   if (idActive == "drag1") {
     scoreIdeas += 1;
+    updateStats();
   }
 }
 
+// animate the person at the computer
 function typingComputer() {
   if ($receiveInspiration.attr("src") == "assets/images/personWaiting.png") {
         $receiveInspiration.attr("src", "assets/images/personTyping.png");
@@ -83,5 +89,29 @@ function typingComputer() {
 
 // what the software will run continuously
 function draw() {
+  fill(255);
+  textSize(25);
+  text("Ideas imagined: "+scoreIdeas,20,20);
+  text("Visuals designed: "+scoreVisuals,20,45);
+  text("Typos avoided: "+scoreTypos,20,70);
+  text("Interactions implemented: "+scoreInteraction,20,95);
+  text("Lines of script completed: "+scoreScript,20,120);
+}
 
+function updateStats() {
+  // define the variables
+  let scores = $(".draggables").length-1;
+  let $parent = $("#stats");
+
+  // make a loop to create the different divs for the stats
+  for (let i = 0; i <= scores; i++){
+    $parent.append("<div id='stat"+(i+1)+"'></div>");
+  }
+
+  // display the states with their titles and scores
+  $("#stat1").html("Ideas imagined: "+scoreIdeas);
+  $("#stat2").html("Visuals designed: "+scoreVisuals);
+  $("#stat3").html("Typos avoided: "+scoreTypos);
+  $("#stat4").html("Interactions implemented: "+scoreInteraction);
+  $("#stat5").html("Lines of script completed: "+scoreScript);
 }
