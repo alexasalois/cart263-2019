@@ -8,16 +8,14 @@
   justify-content: center;
 }
 
-.section1 {
-  position: absolute;
-}
-
 .draggables {
+  text-align: center;
   position: absolute;
 }
 
 #computerPerson {
-  top: 80%;
+  position: absolute;
+  top: 60%;
   left: 50%;
 }
 
