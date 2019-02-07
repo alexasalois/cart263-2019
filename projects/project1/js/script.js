@@ -84,19 +84,8 @@ function typingComputer() {
       }
       else {$receiveInspiration.attr("src", "assets/images/personWaiting.png");
       }
-}
+    }
 
-
-// what the software will run continuously
-function draw() {
-  fill(255);
-  textSize(25);
-  text("Ideas imagined: "+scoreIdeas,20,20);
-  text("Visuals designed: "+scoreVisuals,20,45);
-  text("Typos avoided: "+scoreTypos,20,70);
-  text("Interactions implemented: "+scoreInteraction,20,95);
-  text("Lines of script completed: "+scoreScript,20,120);
-}
 
 function updateStats() {
   // define the variables

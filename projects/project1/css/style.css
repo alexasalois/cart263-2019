@@ -1,7 +1,6 @@
 /* Style Sheet */
 
 * {
-  background-color: black;
   z-index: -100;
   color: white;
   font-family: 'Press Start 2P', cursive;
@@ -9,10 +8,20 @@
   justify-content: center;
 }
 
+body {
+  background-color: black;
+}
+
 .draggables {
+  font-size: 35px;
   text-align: center;
   position: absolute;
   display: inline-block;
+  font-family: 'Iceland', cursive;
+}
+
+#stats {
+  line-height: 50px;
 }
 
 #computerPerson {
