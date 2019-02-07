@@ -22,11 +22,11 @@ let scoreVisuals = 0;
 let scoreInteraction = 0;
 
 // set variables for score to reach
-let goalIdeas = 0;
-let goalTypos = 0;
-let goalScript = 0;
-let goalVisuals = 0;
-let goalInteraction = 0;
+let goalIdeas = 3;
+let goalTypos = 5;
+let goalScript = 8;
+let goalVisuals = 4;
+let goalInteraction = 2;
 
 // set variable that checks which drag object is being dropped
 let idActive;
@@ -53,7 +53,7 @@ function retain( event, ui) {
   // Create variable to store the different drag IDs
   idActive = ui.draggable[0].id;
 
-  // play typing sound
+  // play typing sound 
   $('#typingSound').trigger('play');
 
   // Set an interval for the typing animation
@@ -132,11 +132,11 @@ function showInstructions() {
 function checkScore() {
   console.log("score?");
   if ((scoreIdeas > goalIdeas) && (scoreTypos > goalTypos) && (scoreScript > goalScript) && (scoreVisuals > goalVisuals) && (scoreInteraction > goalInteraction)) {
-    goalIdeas += 5;
-    goalTypos += 5;
-    goalScript += 5;
-    goalVisuals += 5;
-    goalInteraction += 5;
+    goalIdeas *= 5;
+    goalTypos *= 2;
+    goalScript *= 2;
+    goalVisuals *= 2;
+    goalInteraction *= 2;
 
     // show pop up with new instructions
     showInstructions();
