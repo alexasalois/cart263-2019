@@ -34,6 +34,7 @@ let idActive;
 // when the page is ready, run this
 $(document).ready(setup);
 
+// play music when you close the tab
 $(document).on('click', function(){
  $('#backgroundMusic').trigger('play');
 });
@@ -118,17 +119,17 @@ function updateStats() {
   }
 
   // display the states with their titles and scores
-  $("#stat1").html("Ideas imagined: "+scoreIdeas);
-  $("#stat2").html("Visuals designed: "+scoreVisuals);
-  $("#stat3").html("Typos avoided: "+scoreTypos);
-  $("#stat4").html("Interactions implemented: "+scoreInteraction);
-  $("#stat5").html("Lines of script completed: "+scoreScript);
+  $("#stat1").html("Ideas imagined: "+scoreIdeas+" out of "+goalIdeas);
+  $("#stat2").html("Visuals designed: "+scoreVisuals+" out of "+goalVisuals);
+  $("#stat3").html("Typos avoided: "+scoreTypos+" out of "+goalTypos);
+  $("#stat4").html("Interactions created: "+scoreInteraction+" out of "+goalInteraction);
+  $("#stat5").html("Lines of script: "+scoreScript+" out of "+goalScript);
 }
 
 function showInstructions() {
   // Set up the dialog with the instructions
   $("#first").text("To submit, make sure you have at least "+goalIdeas+" good ideas, create "+goalVisuals+" cool visuals, avoid "
-  +goalTypos+" typos, implement "+goalInteraction+" interactions, and  write "+goalScript+" lines of script. Good luck! (if you didn't realize, drag the objects on your hard-working icon.)")
+  +goalTypos+" typos, implement "+goalInteraction+" interactions, and  write "+goalScript+" lines of script. Good luck! (if you didn't realize, drag the objects on your hard-working icon. Now close this and get to work.)")
   $("#first").dialog({
     width: 450
   });

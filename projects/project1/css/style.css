@@ -39,6 +39,7 @@ body {
 #stats {
   line-height: 50px;
   z-index: -10;
+  width: 1000px;
 }
 
 /* Don't display bar for the sounds */
