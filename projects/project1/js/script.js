@@ -33,11 +33,14 @@ let idActive;
 
 // when the page is ready, run this
 $(document).ready(setup);
-$('audio#backgroundMusic')[0].play();
-//$('#backgroundMusic').trigger('play');
 
-// prepare the code to run
+// play the background music when the page loads
+$(document).on('click', function(){
+ $('#backgroundMusic').trigger('play');
+});
+
 function setup() {
+  // create draggable objects and receiver
   $dragInspiration = $(".draggables");
   $receiveInspiration = $("#computerPerson");
 
