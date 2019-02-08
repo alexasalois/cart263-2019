@@ -33,7 +33,8 @@ let idActive;
 
 // when the page is ready, run this
 $(document).ready(setup);
-$('#backgroundMusic').trigger('play');
+$('audio#backgroundMusic')[0].play();
+//$('#backgroundMusic').trigger('play');
 
 // prepare the code to run
 function setup() {
