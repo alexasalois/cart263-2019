@@ -18,7 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
-
+      
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
@@ -31,6 +31,7 @@
 
   <body>
 
+    <!-- Load the audio files -->
     <audio class="audios" id="typingSound" controls preload="none">
        <source src="assets/sounds/typing.wav" type="audio/wav">
     </audio>
@@ -39,6 +40,7 @@
        <source src="assets/sounds/backgroundMusic.mp3" type="audio/mp3">
     </audio>
 
+    <!-- Set up the draggable objects and the image of the receiving object -->
     <img id="computerPerson" src="assets/images/personWaiting.png">
     <div class="draggables" id="drag1">Good ideas</div>
     <div class="draggables" id="drag2">Zero typos</div>
@@ -46,11 +48,12 @@
     <div class="draggables" id="drag4">Amazing visuals</div>
     <div class="draggables" id="drag5">Complex interaction</div>
 
+    <!-- Create dialog box for the instructions -->
     <div class="instructions" id="first" title="FINISH YOUR ASSIGNMENT!"></div>
 
+    <!-- Create div for the stats on the left -->
     <div id="stats">
     </div>
 
   </body>
-
 </html>

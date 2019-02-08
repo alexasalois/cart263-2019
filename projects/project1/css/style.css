@@ -5,18 +5,18 @@ html {
   height: 500px;
 }
 
-
+/* All text white */
 * {
   color: white;
   font-family: 'Press Start 2P', cursive;
 }
 
+/* Set up background colour*/
 body {
   background-color: black;
-  width: 700px;
-  height: 500px;
 }
 
+/* Characteristics of the draggable object */
 .draggables {
   font-size: 35px;
   text-align: center;
@@ -26,15 +26,22 @@ body {
   font-family: 'Iceland', cursive;
 }
 
+/* Text colour of the title of the pop up window */
 .ui-dialog-title {
   color: red;
 }
 
+.instructions {
+  line-height: 25px;
+}
+
+/* Stats of the player */
 #stats {
   line-height: 50px;
   z-index: -10;
 }
 
+/* Don't display bar for the sounds */
 #typingSound {
   display: none;
 }
@@ -43,6 +50,7 @@ body {
   display: none;
 }
 
+/* Characteristics of player icon */
 #computerPerson {
   position: absolute;
   top: 60%;
@@ -50,6 +58,7 @@ body {
   display: inline-block;
 }
 
+/* Positions of each draggable objects */
 #drag1 {
   top: 65%;
   left: 10%;
@@ -57,7 +66,7 @@ body {
 
 #drag2 {
   top: 35%;
-  left: 50%; 
+  left: 50%;
 }
 
 #drag3 {

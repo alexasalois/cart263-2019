@@ -53,7 +53,7 @@ function retain( event, ui) {
   // Create variable to store the different drag IDs
   idActive = ui.draggable[0].id;
 
-  // play typing sound 
+  // play typing sound
   $('#typingSound').trigger('play');
 
   // Set an interval for the typing animation
@@ -88,6 +88,7 @@ function retain( event, ui) {
     updateStats();
   }
 
+  // Check the score and update based on the dragged objects
   checkScore();
 
 }
@@ -121,18 +122,19 @@ function updateStats() {
 }
 
 function showInstructions() {
+  // Set up the dialog with the instructions
   $("#first").text("To submit, make sure you have at least "+goalIdeas+" good ideas, avoid "+goalTypos+
   " typos, write "+goalScript+" lines of script, create "+goalVisuals+" cool visuals, and implement "+goalInteraction
-  +" interactions. Good luck!")
+  +" interactions. Good luck! (if you didn't realize, drag the objects on your hard-working icon.)")
   $("#first").dialog({
     width: 450
   });
 }
 
 function checkScore() {
-  console.log("score?");
-  if ((scoreIdeas > goalIdeas) && (scoreTypos > goalTypos) && (scoreScript > goalScript) && (scoreVisuals > goalVisuals) && (scoreInteraction > goalInteraction)) {
-    goalIdeas *= 5;
+  // Check if the player accomplishes the goal, if so, double the requirements
+  if ((scoreIdeas > goalIdeas -1) && (scoreTypos > goalTypos -1) && (scoreScript > goalScript -1) && (scoreVisuals > goalVisuals -1) && (scoreInteraction > goalInteraction -1)) {
+    goalIdeas *= 2;
     goalTypos *= 2;
     goalScript *= 2;
     goalVisuals *= 2;
