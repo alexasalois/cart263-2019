@@ -123,9 +123,8 @@ function updateStats() {
 
 function showInstructions() {
   // Set up the dialog with the instructions
-  $("#first").text("To submit, make sure you have at least "+goalIdeas+" good ideas, avoid "+goalTypos+
-  " typos, write "+goalScript+" lines of script, create "+goalVisuals+" cool visuals, and implement "+goalInteraction
-  +" interactions. Good luck! (if you didn't realize, drag the objects on your hard-working icon.)")
+  $("#first").text("To submit, make sure you have at least "+goalIdeas+" good ideas, create "+goalVisuals+" cool visuals, avoid "
+  +goalTypos+" typos, implement "+goalInteraction+" interactions, and  write "+goalScript+" lines of script. Good luck! (if you didn't realize, drag the objects on your hard-working icon.)")
   $("#first").dialog({
     width: 450
   });
