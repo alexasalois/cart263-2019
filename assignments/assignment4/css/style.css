@@ -23,3 +23,7 @@ This is the style file for this project.
   width: 200px;
   height: 200px;
 }
+
+#scream, #yay {
+  display: none;
+}
