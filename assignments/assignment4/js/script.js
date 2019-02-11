@@ -13,6 +13,7 @@ let $mouth;
 let $brownie;
 let $mouthClosed;
 let $broccoli;
+let idActive;
 
 //
 
@@ -28,20 +29,31 @@ function setup() {
 
   $brownie.draggable();
   $mouth.droppable({ drop: eat });
+  $broccoli.draggable({revert: true});
   }
 
 //
 
 function eat(event, ui) {
-  ui.draggable.remove();
-  console.log("yummy!");
+  idActive = ui.draggable[0].id;
 
-  let chewInterval = setInterval(chewThatShit, 10);
+  // The mouth happily eats the brownie
+  if (idActive == "brownie" ) {
+    $brownie.draggable( "disable" );
+    $brownie.remove();
 
-  setTimeout(function() {
-    clearInterval(chewInterval);
-  },2000);
-}
+      // Mouth chews...
+      let chewInterval = setInterval(chewThatShit, 100);
+
+      setTimeout(function() {
+        clearInterval(chewInterval);
+      },2000);
+    }
+
+    if (idActive == "broccoli") {
+      $broccoli.draggable({revert: true});
+    }
+  }
 
 function chewThatShit() {
       if ($mouth.attr("src") == "assets/images/mouth_open.png") {
