@@ -29,7 +29,10 @@ function setup() {
 
   $brownie.draggable();
   $mouth.droppable({ drop: eat });
-  $broccoli.draggable();
+  $broccoli.draggable({
+    start: function() {
+      $("#scream").trigger('play')}
+    });
   }
 
 //
@@ -56,9 +59,6 @@ function eat(event, ui) {
     // if the broccoli is "eaten", reject!
     if (idActive == "broccoli") {
       $broccoli.draggable({revert: true});
-
-      // unhappy noise
-      $("#scream").trigger('play');
     }
   }
 
