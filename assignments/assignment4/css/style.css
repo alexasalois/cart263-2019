@@ -1,0 +1,20 @@
+/*********************************************
+
+This is the style file for this project.
+
+**********************************************/
+
+#mouthOpen {
+  width: 500px;
+  height: 405px;
+}
+
+#brownie {
+  width: 200px;
+  height: 200px;
+}
+
+#mouthClosed {
+  width: 500px;
+  height: 250px;
+}
