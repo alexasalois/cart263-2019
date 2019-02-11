@@ -12,6 +12,7 @@ author, and this description to match your project!
 let $mouth;
 let $brownie;
 let $mouthClosed;
+let $broccoli;
 
 //
 
@@ -23,6 +24,7 @@ function setup() {
 
   $mouth = $("#mouthOpen");
   $brownie = $("#brownie");
+  $broccoli = $("#broccoli");
 
   $brownie.draggable();
   $mouth.droppable({ drop: eat });
