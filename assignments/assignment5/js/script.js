@@ -155,12 +155,35 @@ $(document).ready(function(){
 
      if (annyang) {
        let commands = {
-         'I give up.': function() {
-           console.log("sad lol");
+         // if you give up, new round starts
+         'I give up': function() {
+           responsiveVoice.speak('You suck.','Australian Male');
+           console.log("giving up");
+           $(this).effect('shake');
+           $('.guess').remove();
+           setTimeout(newRound,1000);
          },
-         'Say it again.': function() {
-           speakAnimal(correctAnimal);
-         }};
+
+         // name is repeated
+         'Say it again': function() {
+           responsiveVoice.speak('Are you deaf?','Australian Male');
+           setTimeout(function () {speakAnimal(correctAnimal)},2000);
+         },
+
+         "I think it's *tag": function(tag) {
+           if (tag == correctAnimal) {
+             responsiveVoice.speak('Wow you are amazing I love you!','Australian Male');
+             $('.guess').remove();
+             setTimeout(newRound,2000);
+           }
+
+           else {
+             responsiveVoice.speak('That was bad.','Australian Male');
+           }
+         }
+       };
+
+       // first round
        newRound();
        annyang.addCommands(commands);
 
