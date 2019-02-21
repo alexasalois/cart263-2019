@@ -157,7 +157,7 @@ $(document).ready(function(){
        let commands = {
          // if you give up, new round starts
          'I give up': function() {
-           responsiveVoice.speak('You suck.','Australian Male');
+           responsiveVoice.speak('You suck.','UK English Male');
            console.log("giving up");
            $(this).effect('shake');
            $('.guess').remove();
@@ -166,19 +166,19 @@ $(document).ready(function(){
 
          // name is repeated
          'Say it again': function() {
-           responsiveVoice.speak('Are you deaf?','Australian Male');
+           responsiveVoice.speak('Are you deaf?','UK English Male');
            setTimeout(function () {speakAnimal(correctAnimal)},2000);
          },
 
          "I think it's *tag": function(tag) {
            if (tag == correctAnimal) {
-             responsiveVoice.speak('Wow you are amazing I love you!','Australian Male');
+             responsiveVoice.speak('Wow you are amazing I love you!','UK English Male');
              $('.guess').remove();
              setTimeout(newRound,2000);
            }
 
            else {
-             responsiveVoice.speak('That was bad.','Australian Male');
+             responsiveVoice.speak('That was bad.','UK English Male');
            }
          }
        };
@@ -246,5 +246,5 @@ function speakAnimal(animal) {
   }
 
   // voice talks
-  responsiveVoice.speak(reverseAnimal, 'Australian Male', options);
+  responsiveVoice.speak(reverseAnimal, 'UK English Male', options);
 }
