@@ -146,6 +146,7 @@ let animals=
     ]
 let answers=[];
 let correctAnimal;
+let score=0;
 const NUM_OPTIONS = 5;
 
 // get document ready and show message, starting to listen
@@ -153,11 +154,20 @@ $(document).ready(function(){
    $('#start').on('click', function() {
      $(this).remove();
 
+     // display score
+     $('body').append('<div>You guessed '+score+' right.</div>');
+
      if (annyang) {
        let commands = {
          // if you give up, voice is mean :c
          'I give up': function() {
            responsiveVoice.speak('You suck.','UK English Male');
+
+           // reset score
+           score = 0;
+
+           // display
+           displayScore();
 
            // shake the right answer
            $('.guess').each(function () {
@@ -172,6 +182,9 @@ $(document).ready(function(){
 
             // start new round
             setTimeout(newRound,2000);
+
+            // display
+            displayScore();
             },
 
          // name is repeated
@@ -182,25 +195,48 @@ $(document).ready(function(){
 
          "I think it's *tag": function(tag) {
            if (tag == correctAnimal) {
+             // voice is happy
              responsiveVoice.speak('Wow you are amazing I love you!','UK English Male');
+
+             // remove guesses
              $('.guess').remove();
+
+             // update score
+             score += 1;
+
+             // start round
              setTimeout(newRound,2000);
+
+             // displayScore
+             displayScore();
            }
 
            else {
+             // voice is upset
              responsiveVoice.speak('That was bad.','UK English Male');
+
+             // score resets
+             score = 0;
+
+             // display
+             displayScore();
            }
          }
        };
 
-       // first round
+       // start game, first round
        newRound();
+       displayScore();
        annyang.addCommands(commands);
 
      // listening...
      annyang.start();
    }});
  });
+
+function displayScore() {
+    $('#score').html('You guessed '+score+' right.');
+}
 
 
 // add a button for the guesses
@@ -217,10 +253,18 @@ function addButton(label) {
     if ($(this).text() === correctAnimal) {
       $('.guess').remove();
       setTimeout(newRound,1000);
+
+      // update score
+      score+=1;
+      displayScore();
     }
 
     // wrong
     else {
+      // reset score
+      displayScore();
+      score = 0;
+
       speakAnimal(correctAnimal);
     }
   });
