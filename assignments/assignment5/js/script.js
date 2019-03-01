@@ -168,10 +168,10 @@ $(document).ready(function(){
 
             // wait till you remove the guesses...
             setTimeout(function() {
-            $('.guess').remove();} , 3000);
+            $('.guess').remove();} , 2000);
 
             // start new round
-            setTimeout(newRound,3000);
+            setTimeout(newRound,2000);
             },
 
          // name is repeated
