@@ -155,7 +155,7 @@ $(document).ready(function(){
      $(this).remove();
 
      // display score
-     $('body').append('<div>You guessed '+score+' right.</div>');
+     $('body').append('<div id="score">You guessed '+score+' right.</div>');
 
      if (annyang) {
        let commands = {
