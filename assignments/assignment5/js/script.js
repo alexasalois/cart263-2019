@@ -155,14 +155,24 @@ $(document).ready(function(){
 
      if (annyang) {
        let commands = {
-         // if you give up, new round starts
+         // if you give up, voice is mean :c
          'I give up': function() {
            responsiveVoice.speak('You suck.','UK English Male');
-           console.log("giving up");
-           $(this).effect('shake');
-           $('.guess').remove();
-           setTimeout(newRound,1000);
-         },
+
+           // shake the right answer
+           $('.guess').each(function () {
+             if ($(this).text() === correctAnimal) {
+               $(this).effect('shake');
+             }
+           });
+
+            // wait till you remove the guesses...
+            setTimeout(function() {
+            $('.guess').remove();} , 3000);
+
+            // start new round
+            setTimeout(newRound,3000);
+            },
 
          // name is repeated
          'Say it again': function() {
