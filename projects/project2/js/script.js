@@ -7,6 +7,8 @@ This is a template. You must fill in the title,
 author, and this description to match your project!
 
 ******************/
+
+let ctx = null;
 var alphabet = [
   "a",
   "b",
@@ -127,6 +129,7 @@ function preload () {
 
 
 function create () {
+  ctx = this;
    // background is now green
    this.add.image(650, 300, 'normalBg');
 
@@ -146,45 +149,7 @@ function create () {
    player.setBounce(0.2);
    player.setCollideWorldBounds(true);
 
-   // Word to spell out is chosen randomly in the list
-   chosenWord = cute[Math.floor(Math.random()*cute.length)];
-
-   // Displays the word to collect
-   this.add.text(550, 16,chosenWord, { fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000' });
-   responsiveVoice.speak(chosenWord,'UK English Male');
-
-   // Letter objects to collect, word is split into an array, then array used as the key for the group
-   // split word
-   lettersDisplay = chosenWord.split('');
-   console.log(lettersDisplay);
-
-   // create group where physics will be applied (the letters)
-   let group = this.physics.add.group();
-
-    // check how many letters in the chosen word
-    for (var i = 0; i < lettersDisplay.length; i++) {
-      // height they will fall from
-      var height = 20;
-
-      // store the letters in the physics group
-      var letter = this.add.text(width,height,lettersDisplay[i], {fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000'});
-      group.add(letter);
-
-      // space them out
-      width+=100;
-
-      letter.body.bounce.y = 0.99;
-      letter.body.collideWorldBounds = true;
-
-
-      }
-
-
-     // Interact with the letters
-     this.physics.add.overlap(player,group,checkCorrectLetters,null,this);
-
-     // make the letter group interact with the static platforms
-     this.physics.add.collider(group, platforms);
+   startGame();
 
    // animation of the avatar walking
     // walking to the left
@@ -239,14 +204,61 @@ function create () {
      }
    }
 
-   function checkCorrectLetters(player,group) {
-   // What happens when you get all the letters
+   function checkCorrectLetters(player,group,ctx) {
+   // What happens when you get all the letters: letter is removed, +1 for the word to complete
      group.destroy();
      correctLetters += 1;
-     console.log(correctLetters);
 
      if (correctLetters === lettersDisplay.length) {
        score += 1;
        console.log(score)
+       startGame();
      }
+   }
+
+   function startGame() {
+
+        // Word to spell out is chosen randomly in the list
+        chosenWord = cute[Math.floor(Math.random()*cute.length)];
+
+        // Displays the word to collect
+        ctx.add.text(550, 16,chosenWord, { fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000' });
+        responsiveVoice.speak(chosenWord,'UK English Male');
+
+        // Letter objects to collect, word is split into an array, then array used as the key for the group
+        // split word
+        lettersDisplay = chosenWord.split('');
+        //lettersDisplay = chosenWord.shuffle('');
+        console.log(lettersDisplay);
+
+        // create group where physics will be applied (the letters)
+        let group = ctx.physics.add.group();
+
+         // check how many letters in the chosen word
+         for (var i = 0; i < lettersDisplay.length; i++) {
+           // height they will fall from
+           var height = 20;
+
+           // store the letters in the physics group
+           var letter = ctx.add.text(width,height,lettersDisplay[i], {fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000'});
+           group.add(letter);
+
+           // space them out
+           width+=100;
+
+           // make letters bounce (added difficulty)
+           letter.body.bounce.y = 0.99;
+           letter.body.collideWorldBounds = true;
+           letter.body.setVelocityX(300);
+           letter.body.bounce.x = 0.99;
+           letter.body.setVelocityY(300);
+           }
+
+
+          // Interact with the letters
+          ctx.physics.add.overlap(player,group,checkCorrectLetters,null,ctx);
+
+          // make the letter group interact with the static platforms
+          ctx.physics.add.collider(group, platforms);
+
    }
