@@ -71,13 +71,23 @@ var dark = [
   "uncanny"
 ];
 
+// random word
 var chosenWord;
+
+// groups for the letters of the words
 var lettersDisplay = [];
 var letterObjects;
+
+// for the loop while spawning the letters
 var i = 0;
 var width = 5;
+
+// for the changing font of the game
 var font;
 
+// check the score / correct letters
+var score = 0;
+var correctLetters = 0;
 
 // configure the game
 var config = {
@@ -150,7 +160,7 @@ function create () {
    let group = this.physics.add.group();
 
    // create group to put the other group inside...
-   letterObjects = this.add.group();
+
     // check how many letters in the chosen word
     for (var i = 0; i < lettersDisplay.length; i++) {
       // height they will fall from
@@ -162,7 +172,10 @@ function create () {
 
       // space them out
       width+=100;
-    }
+      }
+
+
+this.physics.add.overlap(player,group,checkCorrectLetters,null,this);
 
      // make the letter group interact with the static platforms
      this.physics.add.collider(group, platforms);
@@ -220,17 +233,14 @@ function create () {
      }
    }
 
-// function displayGame() {
-//   lettersDisplay = chosenWord.split('');
-//   console.log(lettersDisplay);
+   function checkCorrectLetters(player,group) {
+     group.destroy();
+     correctLetters += 1;
+     console.log(correctLetters);
 
-//   letterObjects = this.physics.add.group({
-//     key: 'lettersDisplay',
-//     repeat: 11,
-//     setXY: { x: 12, y: 0, stepX: 70 }
-//   });
-//
-//     letterObjects.children.iterate(function (child) {
-//     child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-// });
-//}
+     if (correctLetters === lettersDisplay.length) {
+       score += 1;
+       console.log(score)
+       chosenWord = cute[Math.floor(Math.random()*cute.length)];
+     }
+   }
