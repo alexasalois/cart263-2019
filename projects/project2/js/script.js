@@ -89,6 +89,8 @@ var font;
 var score = 0;
 var correctLetters = 0;
 
+var random;
+
 // configure the game
 var config = {
     type: Phaser.AUTO,
@@ -119,7 +121,7 @@ function preload () {
    this.load.image('normalBg', 'assets/images/blue.png');
    this.load.image('platform', 'assets/images/platform.png');
    this.load.spritesheet('player', 'assets/images/avatarV2.png', {frameWidth: 113.5, frameHeight: 177});
-// this.load.spritesheet('evilPlayer', 'assets/images/evilavatarV2.png')
+   this.load.spritesheet('evilPlayer', 'assets/images/evilavatarV2.png', {frameWidth: 113.5, frameHeight: 177});
    this.load.image('evilBg', 'assets/images/red.png');
  }
 
@@ -159,8 +161,6 @@ function create () {
    // create group where physics will be applied (the letters)
    let group = this.physics.add.group();
 
-   // create group to put the other group inside...
-
     // check how many letters in the chosen word
     for (var i = 0; i < lettersDisplay.length; i++) {
       // height they will fall from
@@ -172,10 +172,16 @@ function create () {
 
       // space them out
       width+=100;
+
+      letter.body.bounce.y = 0.99;
+      letter.body.collideWorldBounds = true;
+
+
       }
 
 
-this.physics.add.overlap(player,group,checkCorrectLetters,null,this);
+     // Interact with the letters
+     this.physics.add.overlap(player,group,checkCorrectLetters,null,this);
 
      // make the letter group interact with the static platforms
      this.physics.add.collider(group, platforms);
@@ -234,6 +240,7 @@ this.physics.add.overlap(player,group,checkCorrectLetters,null,this);
    }
 
    function checkCorrectLetters(player,group) {
+   // What happens when you get all the letters
      group.destroy();
      correctLetters += 1;
      console.log(correctLetters);
@@ -241,6 +248,5 @@ this.physics.add.overlap(player,group,checkCorrectLetters,null,this);
      if (correctLetters === lettersDisplay.length) {
        score += 1;
        console.log(score)
-       chosenWord = cute[Math.floor(Math.random()*cute.length)];
      }
    }
