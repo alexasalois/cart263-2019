@@ -98,6 +98,10 @@ function create () {
    chosenWord = cute[Math.floor(Math.random()*cute.length)];
    console.log(chosenWord);
 
+   this.add.text(550, 16,chosenWord, { fontSize: '32px', fill: '#000' });
+
+  // this.add.text(chosenWord,100,100);
+
    displayGame();
 
 
