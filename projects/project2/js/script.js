@@ -130,7 +130,7 @@ function create () {
 
 
    // set up player, make sure he stays on screen and bounces when he lands
-   player = this.physics.add.sprite(100, 250, 'player');
+   player = this.physics.add.sprite(575,380, 'player');
    player.setBounce(0.2);
    player.setCollideWorldBounds(true);
 
@@ -146,21 +146,26 @@ function create () {
    lettersDisplay = chosenWord.split('');
    console.log(lettersDisplay);
 
-   // create group
+   // create group where physics will be applied (the letters)
+   let group = this.physics.add.group();
+
+   // create group to put the other group inside...
    letterObjects = this.add.group();
+    // check how many letters in the chosen word
     for (var i = 0; i < lettersDisplay.length; i++) {
+      // height they will fall from
       var height = 20;
+
+      // store the letters in the physics group
       var letter = this.add.text(width,height,lettersDisplay[i], {fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000'});
-      //letterObjects.create(360+Math.random()*200,120+Math.random()*200,letter);
-      //child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      group.add(letter);
+
+      // space them out
       width+=100;
     }
 
-     // make it interact with the platforms
-     this.physics.add.collider(letterObjects, platforms);
-        letterObjects.children.iterate(function (child) {
-        i += 1;
-    });
+     // make the letter group interact with the static platforms
+     this.physics.add.collider(group, platforms);
 
    // animation of the avatar walking
     // walking to the left

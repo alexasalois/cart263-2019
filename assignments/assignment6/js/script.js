@@ -9,6 +9,7 @@ This is a template. You must fill in the title,
 author, and this description to match your project!
 
 ******************/
+let description;
 
 $(document).ready(function() {
 
@@ -27,6 +28,12 @@ function dataLoaded(data) {
     verb = 'are';
   }
   console.log(verb);
+
+  let cat = getRandomElement(data.cats);
+  let room = getRandomElement(data.rooms);
+
+  description = `${condiment} ${verb} like a ${cat} in a ${room}.`;
+$('body').append(description);
 }
 
 function getRandomElement(array) {
