@@ -7,6 +7,34 @@ This is a template. You must fill in the title,
 author, and this description to match your project!
 
 ******************/
+var alphabet = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z"
+];
 
 var cute = [
   "puppy",
@@ -48,6 +76,7 @@ var lettersDisplay = [];
 var letterObjects;
 var i = 0;
 var width = 5;
+var font;
 
 
 // configure the game
@@ -107,10 +136,9 @@ function create () {
 
    // Word to spell out is chosen randomly in the list
    chosenWord = cute[Math.floor(Math.random()*cute.length)];
-   console.log(chosenWord);
 
    // Displays the word to collect
-   this.add.text(550, 16,chosenWord, { fontSize: '32px', fill: '#000' });
+   this.add.text(550, 16,chosenWord, { fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000' });
    responsiveVoice.speak(chosenWord,'UK English Male');
 
    // Letter objects to collect, word is split into an array, then array used as the key for the group
@@ -122,25 +150,20 @@ function create () {
    letterObjects = this.add.group();
     for (var i = 0; i < lettersDisplay.length; i++) {
       var height = 20;
-      var letter = this.add.text(width,height,lettersDisplay[i], {fontSize: '32px', fill: '#000'});
-   //   letterObjects.create(360+Math.random()*200,120+Math.random()*200,letter);
-   //   // .setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-      width+=20;
+      var letter = this.add.text(width,height,lettersDisplay[i], {fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000'});
+      //letterObjects.create(360+Math.random()*200,120+Math.random()*200,letter);
+      //child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      width+=100;
     }
-
-   //console.log(letterObjects.children);
 
      // make it interact with the platforms
      this.physics.add.collider(letterObjects, platforms);
-     console.log("hello?")
         letterObjects.children.iterate(function (child) {
-          console.log(child);
-       console.log(lettersDisplay[i])
-       i += 1;
-       console.log(letterObjects);
- });
+        i += 1;
+    });
 
    // animation of the avatar walking
+    // walking to the left
     this.anims.create({
         key: 'left',
         frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
@@ -148,12 +171,14 @@ function create () {
         repeat: -1
     });
 
+    // resting
     this.anims.create({
         key: 'turn',
         frames: [ { key: 'player', frame: 4 } ],
         frameRate: 20
     });
 
+    // walking to the right
     this.anims.create({
         key: 'right',
         frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
