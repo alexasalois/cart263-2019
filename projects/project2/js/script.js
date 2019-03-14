@@ -46,12 +46,15 @@ var dark = [
 var chosenWord;
 var lettersDisplay = [];
 var letterObjects;
+var i = 0;
+var width = 5;
+
 
 // configure the game
 var config = {
     type: Phaser.AUTO,
-    width: 1500,
-    height: 700,
+    width: 1300,
+    height: 600,
     physics: {
         default: 'arcade',
         arcade: {
@@ -74,24 +77,24 @@ var config = {
 
 function preload () {
    // load the assets
-   this.load.image('greenBg', 'assets/images/Green.jpg');
+   this.load.image('normalBg', 'assets/images/blue.png');
    this.load.image('platform', 'assets/images/platform.png');
-   this.load.spritesheet('player', 'assets/images/avatar1.png', {frameWidth: 95, frameHeight: 177});
+   this.load.spritesheet('player', 'assets/images/avatarV2.png', {frameWidth: 113.5, frameHeight: 177});
  }
 
 
 function create () {
    // background is now green
-   this.add.image(750, 300, 'greenBg');
+   this.add.image(650, 300, 'normalBg');
 
    // platforms are static (aka you can land and jump on them and they don't move)
    platforms = this.physics.add.staticGroup();
 
    // create platforms for the player to move around
-   platforms.create(200, 700, 'platform').setScale(2).refreshBody();
-   platforms.create(1300, 700, 'platform');
-   platforms.create(400, 250, 'platform');
-   platforms.create(950, 350, 'platform');
+   platforms.create(0, 650, 'platform').setScale(10).refreshBody();
+   platforms.create(1200, 400, 'platform');
+   platforms.create(0, 350, 'platform');
+   platforms.create(550, 200, 'platform');
 
    // set up player, make sure he stays on screen and bounces when he lands
    player = this.physics.add.sprite(100, 250, 'player');
@@ -107,18 +110,30 @@ function create () {
    responsiveVoice.speak(chosenWord,'UK English Male');
 
    // Letter objects to collect, word is split into an array, then array used as the key for the group
+   // split word
    lettersDisplay = chosenWord.split('');
    console.log(lettersDisplay);
 
-   letterObjects = this.physics.add.group({
-     key: 'lettersDisplay',
-     repeat: 11,
-     setXY: { x: 12, y: 0, stepX: 70 }
-   });
+   // create group
+   letterObjects = this.add.group();
+   for (var i = 0; i < lettersDisplay.length; i++) {
+     var height = 20;
+     var letter = this.add.text(width,height,lettersDisplay[i], {fontSize: '32px', fill: '#000'});
+     letterObjects.create(360+Math.random()*200,120+Math.random()*200,letter);
+     // .setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+     width+=20;
+   }
 
+   console.log(letterObjects.children);
+
+     // make it interact with the platforms
      this.physics.add.collider(letterObjects, platforms);
-     letterObjects.children.iterate(function (child) {
-     child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+     console.log("hello?")
+        letterObjects.children.iterate(function (child) {
+          console.log(child);
+       console.log(lettersDisplay[i])
+       i += 1;
+       console.log(letterObjects);
  });
 
    // animation of the avatar walking
@@ -137,7 +152,7 @@ function create () {
 
     this.anims.create({
         key: 'right',
-        frames: this.anims.generateFrameNumbers('player', { start: 4, end: 8 }),
+        frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
         frameRate: 10,
         repeat: -1
     });
@@ -167,7 +182,7 @@ function create () {
      }
 
      if (cursors.up.isDown && player.body.touching.down) {
-       player.setVelocityY(-400);
+       player.setVelocityY(-300);
      }
    }
 
