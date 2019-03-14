@@ -75,6 +75,7 @@ var dark = [
 
 // random word
 var chosenWord;
+var onScreenWord;
 
 // groups for the letters of the words
 var lettersDisplay = [];
@@ -89,9 +90,8 @@ var font;
 
 // check the score / correct letters
 var score = 0;
+var onScreenScore;
 var correctLetters = 0;
-
-var random;
 
 // configure the game
 var config = {
@@ -148,6 +148,9 @@ function create () {
    player = this.physics.add.sprite(575,380, 'player');
    player.setBounce(0.2);
    player.setCollideWorldBounds(true);
+
+   // display score on screen
+   onScreenScore = ctx.add.text(10,16,"score: "+score, { fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000'});
 
    startGame();
 
@@ -209,9 +212,14 @@ function create () {
      group.destroy();
      correctLetters += 1;
 
+     // if you catch the entire word
      if (correctLetters === lettersDisplay.length) {
-       score += 1;
-       console.log(score)
+       // reset everythaaang
+       width = 0;
+       score = score + 1;
+       correctLetters = 0;
+       onScreenScore.setText('score: ' + score);
+       onScreenWord.destroy();
        startGame();
      }
    }
@@ -222,14 +230,12 @@ function create () {
         chosenWord = cute[Math.floor(Math.random()*cute.length)];
 
         // Displays the word to collect
-        ctx.add.text(550, 16,chosenWord, { fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000' });
+        onScreenWord = ctx.add.text(370,16,"collect the letters to spell "+chosenWord+"!", { fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000' });
         responsiveVoice.speak(chosenWord,'UK English Male');
 
         // Letter objects to collect, word is split into an array, then array used as the key for the group
         // split word
         lettersDisplay = chosenWord.split('');
-        //lettersDisplay = chosenWord.shuffle('');
-        console.log(lettersDisplay);
 
         // create group where physics will be applied (the letters)
         let group = ctx.physics.add.group();
@@ -240,11 +246,11 @@ function create () {
            var height = 20;
 
            // store the letters in the physics group
-           var letter = ctx.add.text(width,height,lettersDisplay[i], {fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000'});
+           var letter = ctx.add.text(width,height,lettersDisplay[i], {fontSize: '55px', fontFamily: 'Crafty Girls', fill: '#000'});
            group.add(letter);
 
            // space them out
-           width+=100;
+           width += 150;
 
            // make letters bounce (added difficulty)
            letter.body.bounce.y = 0.99;
@@ -253,7 +259,6 @@ function create () {
            letter.body.bounce.x = 0.99;
            letter.body.setVelocityY(300);
            }
-
 
           // Interact with the letters
           ctx.physics.add.overlap(player,group,checkCorrectLetters,null,ctx);
