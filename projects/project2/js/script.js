@@ -80,6 +80,8 @@ function preload () {
    this.load.image('normalBg', 'assets/images/blue.png');
    this.load.image('platform', 'assets/images/platform.png');
    this.load.spritesheet('player', 'assets/images/avatarV2.png', {frameWidth: 113.5, frameHeight: 177});
+// this.load.spritesheet('evilPlayer', 'assets/images/evilavatarV2.png')
+   this.load.image('evilBg', 'assets/images/red.png');
  }
 
 
@@ -92,9 +94,11 @@ function create () {
 
    // create platforms for the player to move around
    platforms.create(0, 650, 'platform').setScale(10).refreshBody();
-   platforms.create(1200, 400, 'platform');
+   platforms.create(1120, 330, 'platform');
    platforms.create(0, 350, 'platform');
-   platforms.create(550, 200, 'platform');
+   platforms.create(500, 270, 'platform');
+   platforms.create(620, 480, 'platform');
+
 
    // set up player, make sure he stays on screen and bounces when he lands
    player = this.physics.add.sprite(100, 250, 'player');
@@ -116,15 +120,15 @@ function create () {
 
    // create group
    letterObjects = this.add.group();
-   for (var i = 0; i < lettersDisplay.length; i++) {
-     var height = 20;
-     var letter = this.add.text(width,height,lettersDisplay[i], {fontSize: '32px', fill: '#000'});
-     letterObjects.create(360+Math.random()*200,120+Math.random()*200,letter);
-     // .setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-     width+=20;
-   }
+    for (var i = 0; i < lettersDisplay.length; i++) {
+      var height = 20;
+      var letter = this.add.text(width,height,lettersDisplay[i], {fontSize: '32px', fill: '#000'});
+   //   letterObjects.create(360+Math.random()*200,120+Math.random()*200,letter);
+   //   // .setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      width+=20;
+    }
 
-   console.log(letterObjects.children);
+   //console.log(letterObjects.children);
 
      // make it interact with the platforms
      this.physics.add.collider(letterObjects, platforms);
