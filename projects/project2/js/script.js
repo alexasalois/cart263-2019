@@ -3,7 +3,7 @@
 Deceiving Words
 Alexandra Salois
 
-An interactive experience about the darkness of the Internet. 
+An interactive experience about the darkness of the Internet.
 
 ******************/
 
@@ -200,9 +200,7 @@ function create () {
  }
 
  function update () {
-   // set up the controls with the arrow keys
-   console.log(happyGame);
-
+   // setting up the keys
    // state when player is going left (evil and normal)
    if (cursors.left.isDown) {
       if (avatarIsGood) {
