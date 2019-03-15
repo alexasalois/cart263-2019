@@ -63,6 +63,9 @@ var peacefulBackground;
 var evilBackground;
 var normalBg;
 var evilBg;
+var evilMusic;
+var cuteMusic;
+var normalMusic;
 
 // group for the letters of the random words
 var lettersDisplay = [];
@@ -89,6 +92,7 @@ var config = {
     type: Phaser.AUTO,
     width: 1300,
     height: 600,
+    loop: true,
     physics: {
         default: 'arcade',
         arcade: {
@@ -116,6 +120,8 @@ function preload () {
    this.load.image('platform', 'assets/images/platform.png');
    this.load.spritesheet('player', 'assets/images/avatarprise2.png', {frameWidth: 130, frameHeight: 174});
    this.load.image('evilBg', 'assets/images/red.png');
+   this.load.audio('cuteMusic', 'assets/sounds/cute.mp3');
+   this.load.audio('evilMusic', 'assets/sounds/evil.mp3');
  }
 
 
@@ -124,6 +130,10 @@ function create () {
    // background is blue initially, red is hiding under
    evilBackground = this.add.image(650,300, 'evilBg');
    peacefulBackground = this.add.image(650, 300, 'normalBg');
+
+   let music = this.sound.add('evilMusic',config);
+   music.play();
+
 
    // game aesthetics change depending on the game state (evil or normal)
    changeBackground();
