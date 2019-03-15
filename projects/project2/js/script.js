@@ -1,15 +1,16 @@
 /*****************
 
-Title of Project
-Author Name
+Deceiving Words
+Alexandra Salois
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+An interactive experience about the darkness of the Internet. 
 
 ******************/
 
+// so the game runs through all the functions...
 let ctx = null;
 
+// array for the cute appearance
 var cute = [
   "puppy",
   "sunshine",
@@ -32,6 +33,7 @@ var cute = [
   "giggle"
 ];
 
+// array for the dark turn
 var dark = [
   "suicide",
   "murder",
@@ -52,18 +54,18 @@ var dark = [
   "slut"
 ];
 
-// random word
+// random word and displaying it
 var chosenWord;
 var onScreenWord;
 
+// var for the assets
 var peacefulBackground;
 var evilBackground;
 var normalBg;
 var evilBg;
 
-// groups for the letters of the words
+// group for the letters of the random words
 var lettersDisplay = [];
-var letterObjects;
 
 // for the loop while spawning the letters
 var i = 0;
@@ -72,12 +74,12 @@ var width = 5;
 // for the changing font of the game
 var font;
 
-// for the aesthetic changes
+// for the aesthetic changes and game state initialized
 var background;
 var avatarIsGood = true;
 var happyGame = true;
 
-// check the score / correct letters
+// check the score / correct letters / on screen score
 var score = 0;
 var onScreenScore;
 var correctLetters = 0;
@@ -101,6 +103,7 @@ var config = {
     }
 };
 
+// the basic variables for the main player, platforms and controls
  var player;
  var platforms;
  var platform;
@@ -122,6 +125,7 @@ function create () {
    evilBackground = this.add.image(650,300, 'evilBg');
    peacefulBackground = this.add.image(650, 300, 'normalBg');
 
+   // game aesthetics change depending on the game state (evil or normal)
    changeBackground();
 
    // platforms are static (aka you can land and jump on them and they don't move)
@@ -142,6 +146,7 @@ function create () {
    // display score on screen
    onScreenScore = ctx.add.text(10,16,"score: "+score, { fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000'});
 
+   // game starts: info is displayed,letters are organized, game state is checked, voice speaks
    startGame();
 
    // animation of the avatar walking
@@ -198,6 +203,7 @@ function create () {
    // set up the controls with the arrow keys
    console.log(happyGame);
 
+   // state when player is going left (evil and normal)
    if (cursors.left.isDown) {
       if (avatarIsGood) {
        player.setVelocityX(-160);
@@ -212,6 +218,7 @@ function create () {
      }
    }
 
+     // state when player is going to the right (evil and normal)
      else if (cursors.right.isDown) {
        if (avatarIsGood) {
          player.setVelocityX(160);
@@ -227,6 +234,7 @@ function create () {
      }
    }
 
+    // state when player is still (evil and normal)
      else {
        if (avatarIsGood) {
        player.setVelocityX(0);
@@ -321,17 +329,16 @@ function changeBackground() {
       happyGame = true;
       chooseGameState();
     }
-  },10000);
+  },15000);
 }
 
+// new array is selected depending on the game state
 function chooseGameState() {
   if (happyGame) {
   chosenWord = cute[Math.floor(Math.random()*cute.length)];
-  console.log("allo");
 }
 
 else {
   chosenWord = dark[Math.floor(Math.random()*dark.length)];
-  console.log("salut bitch")
   }
 }
