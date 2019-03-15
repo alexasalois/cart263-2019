@@ -312,7 +312,7 @@ function changeBackground() {
       happyGame = true;
       chooseGameState();
     }
-  },2000);
+  },10000);
 }
 
 function chooseGameState() {
