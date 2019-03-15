@@ -9,34 +9,6 @@ author, and this description to match your project!
 ******************/
 
 let ctx = null;
-var alphabet = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z"
-];
 
 var cute = [
   "puppy",
@@ -53,6 +25,10 @@ var cute = [
   "dance",
   "funny",
   "cupcake",
+  "hug",
+  "embrace",
+  "beautiful",
+  "desserts",
   "giggle"
 ];
 
@@ -70,12 +46,20 @@ var dark = [
   "pain",
   "broken",
   "anxiety",
-  "uncanny"
+  "uncanny",
+  "cunt",
+  "bitch",
+  "slut"
 ];
 
 // random word
 var chosenWord;
 var onScreenWord;
+
+var peacefulBackground;
+var evilBackground;
+var normalBg;
+var evilBg;
 
 // groups for the letters of the words
 var lettersDisplay = [];
@@ -87,6 +71,11 @@ var width = 5;
 
 // for the changing font of the game
 var font;
+
+//
+var background;
+var avatarIsGood = true;
+var happyGame = true;
 
 // check the score / correct letters
 var score = 0;
@@ -122,16 +111,18 @@ function preload () {
    // load the assets
    this.load.image('normalBg', 'assets/images/blue.png');
    this.load.image('platform', 'assets/images/platform.png');
-   this.load.spritesheet('player', 'assets/images/avatarV2.png', {frameWidth: 113.5, frameHeight: 177});
-   this.load.spritesheet('evilPlayer', 'assets/images/evilavatarV2.png', {frameWidth: 113.5, frameHeight: 177});
+   this.load.spritesheet('player', 'assets/images/avatarprise2.png', {frameWidth: 130, frameHeight: 174});
    this.load.image('evilBg', 'assets/images/red.png');
  }
 
 
 function create () {
   ctx = this;
-   // background is now green
-   this.add.image(650, 300, 'normalBg');
+   // background is blue initially, red is hiding under
+   evilBackground = this.add.image(650,300, 'evilBg');
+   peacefulBackground = this.add.image(650, 300, 'normalBg');
+
+   changeBackground();
 
    // platforms are static (aka you can land and jump on them and they don't move)
    platforms = this.physics.add.staticGroup();
@@ -142,7 +133,6 @@ function create () {
    platforms.create(0, 350, 'platform');
    platforms.create(500, 270, 'platform');
    platforms.create(620, 480, 'platform');
-
 
    // set up player, make sure he stays on screen and bounces when he lands
    player = this.physics.add.sprite(575,380, 'player');
@@ -163,6 +153,13 @@ function create () {
         repeat: -1
     });
 
+    this.anims.create({
+        key: 'evilLeft',
+        frames: this.anims.generateFrameNumbers('player', { start: 9, end: 12 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
     // resting
     this.anims.create({
         key: 'turn',
@@ -170,10 +167,24 @@ function create () {
         frameRate: 20
     });
 
+    this.anims.create({
+        key: 'evilTurn',
+        frames: [ { key: 'player', frame: 13 }],
+        frameRate: 20,
+    });
+
+
     // walking to the right
     this.anims.create({
         key: 'right',
         frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
+    this.anims.create({
+        key: 'evilRight',
+        frames: this.anims.generateFrameNumbers('player', { start: 14, end: 17 }),
         frameRate: 10,
         repeat: -1
     });
@@ -186,21 +197,40 @@ function create () {
  function update () {
    // set up the controls with the arrow keys
    if (cursors.left.isDown) {
-
+      if (avatarIsGood) {
        player.setVelocityX(-160);
        player.anims.play('left', true);
      }
 
-     else if (cursors.right.isDown) {
+     else {
+       player.anims.play('evilLeft', true);
+       player.setVelocityX(-160);
+     }
+   }
 
+     else if (cursors.right.isDown) {
+       if (avatarIsGood) {
          player.setVelocityX(160);
          player.anims.play('right', true);
      }
 
      else {
+       player.anims.play('evilRight', true);
+       player.setVelocityX(160);
+     }
+   }
+
+     else {
+       if (avatarIsGood) {
        player.setVelocityX(0);
        player.anims.play('turn');
      }
+
+     else {
+       player.anims.play('evilTurn', true);
+       player.setVelocityX(0);
+     }
+   }
 
      if (cursors.up.isDown && player.body.touching.down) {
        player.setVelocityY(-300);
@@ -224,10 +254,10 @@ function create () {
      }
    }
 
-   function startGame() {
 
+   function startGame() {
         // Word to spell out is chosen randomly in the list
-        chosenWord = cute[Math.floor(Math.random()*cute.length)];
+        chooseGameState();
 
         // Displays the word to collect
         onScreenWord = ctx.add.text(370,16,"collect the letters to spell "+chosenWord+"!", { fontSize: '32px', fontFamily: 'Crafty Girls', fill: '#000' });
@@ -267,3 +297,30 @@ function create () {
           ctx.physics.add.collider(group, platforms);
 
    }
+
+function changeBackground() {
+  setInterval(function(){
+    if (peacefulBackground.alpha > 0) {
+      peacefulBackground.alpha = 0;
+      avatarIsGood = false;
+      happyGame = false;
+      chooseGameState();
+    }
+    else {
+      peacefulBackground.alpha = 1;
+      avatarIsGood = true;
+      happyGame = true;
+      chooseGameState();
+    }
+  },2000);
+}
+
+function chooseGameState() {
+  if (happyGame = true) {
+  chosenWord = cute[Math.floor(Math.random()*cute.length)];
+}
+
+else {
+  chosenWord = dark[Math.floor(Math.random()*dark.length)];
+  }
+}
