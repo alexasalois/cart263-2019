@@ -1,9 +1,11 @@
 
-The Power of Words
+Learn to Spell!
 by Alexandra Salois
 
 For my project 2, after reading the Essay, my vision was to create something that had an innocent and pure appearance to appeal
-children, but it suddenly goes dark after a while of playing. In fact, the avatar, the word and the overall aesthetics change,
+children, but it suddenly goes dark after a while of playing. I went with an interactive "learn how to spell", as the game shows a
+word and the child learns to collect the letters and associate them to the pronunciation. Some words are very short and easy, while
+others are very disturbing for a child to learn at that age. In fact, the avatar, the word and the overall aesthetics change,
 as it shows the obscure aspect of click bait children's entertainment. First of all, I decided to go with a blue background since
 it is usually associated with the concept of heaven, and also calmness, peace and serenity. When it turns suddenly obscure, the
 background becomes a deep red with trippy circles acting almost like an optical illusion, the "rings of hell". The contrast
