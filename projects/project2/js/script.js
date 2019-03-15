@@ -72,7 +72,7 @@ var width = 5;
 // for the changing font of the game
 var font;
 
-//
+// for the aesthetic changes
 var background;
 var avatarIsGood = true;
 var happyGame = true;
@@ -196,6 +196,8 @@ function create () {
 
  function update () {
    // set up the controls with the arrow keys
+   console.log(happyGame);
+
    if (cursors.left.isDown) {
       if (avatarIsGood) {
        player.setVelocityX(-160);
@@ -205,6 +207,8 @@ function create () {
      else {
        player.anims.play('evilLeft', true);
        player.setVelocityX(-160);
+       happyGame=false;
+
      }
    }
 
@@ -212,11 +216,14 @@ function create () {
        if (avatarIsGood) {
          player.setVelocityX(160);
          player.anims.play('right', true);
+
      }
 
      else {
        player.anims.play('evilRight', true);
        player.setVelocityX(160);
+       happyGame=false;
+
      }
    }
 
@@ -224,12 +231,13 @@ function create () {
        if (avatarIsGood) {
        player.setVelocityX(0);
        player.anims.play('turn');
-     }
+       }
+       else {
+         player.anims.play('evilTurn', true);
+         player.setVelocityX(0);
+         happyGame=false;
 
-     else {
-       player.anims.play('evilTurn', true);
-       player.setVelocityX(0);
-     }
+       }
    }
 
      if (cursors.up.isDown && player.body.touching.down) {
@@ -298,6 +306,7 @@ function create () {
 
    }
 
+// when the game goes dark: avatar, background and array are affected
 function changeBackground() {
   setInterval(function(){
     if (peacefulBackground.alpha > 0) {
@@ -316,11 +325,13 @@ function changeBackground() {
 }
 
 function chooseGameState() {
-  if (happyGame = true) {
+  if (happyGame) {
   chosenWord = cute[Math.floor(Math.random()*cute.length)];
+  console.log("allo");
 }
 
 else {
   chosenWord = dark[Math.floor(Math.random()*dark.length)];
+  console.log("salut bitch")
   }
 }
