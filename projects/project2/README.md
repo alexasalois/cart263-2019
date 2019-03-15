@@ -23,7 +23,8 @@ This was a concept that I wanted to use in my game, as you want to win the game 
 actual ending to the game. The more you try to gain more points, the more the darkness is thrown at you, and affects your thoughts and
 ideas. Being repeatedly exposed to inappropriate content at such a young age can be quite damaging to a child's mind and a traumatizing
 event. That's why I also added a monotone voice over, reading out the words, and his tone does not change even though the terms become
-very dark: he is unaffected by the inappropriate events, and it creates a very unsettling calmness to the game. These creepy creators
-on the Internet are putting out this content with the objective of scaring young viewers, and so with my game, I wanted to represent
-the contrast of deceiving appearances and shocking content, how words can be an extremely powerful tool when it comes to shaping young
-minds.
+very dark: he is unaffected by the inappropriate events, and it creates a very unsettling calmness to the game. Music was also added,
+and the track I chose is from the game I mentioned, as it is a mixture of a cute sound and a creepy background, which adds to the
+eeriness of the game. These creepy creators on the Internet are putting out this content with the objective of scaring young viewers,
+and so with my game, I wanted to represent the contrast of deceiving appearances and shocking content, how words can be an extremely
+powerful tool when it comes to shaping young minds.
