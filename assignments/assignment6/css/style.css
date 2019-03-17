@@ -3,3 +3,10 @@
 This is the style file for this project.
 
 **********************************************/
+
+body {
+  font-family: 'Over the Rainbow', cursive;
+  font-size: 40px;
+  margin: 20px;
+  padding: 20px;
+}
