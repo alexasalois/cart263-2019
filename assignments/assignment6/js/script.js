@@ -21,7 +21,7 @@ $(document).ready(function() {
 });
 
 function reset() {
-  // On click, add a new sentence!
+  // On click, add a new sentence! 
   $.getJSON('data/data.json', dataLoaded);
 }
 
