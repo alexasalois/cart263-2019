@@ -65,7 +65,7 @@ var normalBg;
 var evilBg;
 var evilMusic;
 var cuteMusic;
-var normalMusic;
+var music;
 
 // group for the letters of the random words
 var lettersDisplay = [];
@@ -130,10 +130,8 @@ function create () {
    // background is blue initially, red is hiding under
    evilBackground = this.add.image(650,300, 'evilBg');
    peacefulBackground = this.add.image(650, 300, 'normalBg');
-
    let music = this.sound.add('evilMusic',config);
    music.play();
-
 
    // game aesthetics change depending on the game state (evil or normal)
    changeBackground();
