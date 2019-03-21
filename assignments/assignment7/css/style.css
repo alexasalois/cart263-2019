@@ -7,6 +7,10 @@ so the canvas is flush with the top left corner.
 **********************************************/
 
 body {
-  padding: 0;
-  margin: 0;
+  background-color: yellow;
+  color: red;
+  margin: 10px;
+  text-align: center;
+  font-size: 90px;
+  font-family: 'Monoton',cursive;
 }

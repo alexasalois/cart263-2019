@@ -60,10 +60,6 @@ function setup() {
     source: 'wave',
   });
 
-  var distortion = new Pizzicato.Effects.Distortion({
-    gain: 1
-  });
-
   var flanger = new Pizzicato.Effects.Flanger({
     time: 0.45,
     speed: 0.2,
@@ -97,7 +93,6 @@ function setup() {
 
    kickFX.addEffect(stereoPanner);
    kickFX.addEffect(dubDelay);
-   //kickFX.addEffect(distortion);
    snareFX.addEffect(tremolo);
    synthFX.addEffect(flanger);
 }
