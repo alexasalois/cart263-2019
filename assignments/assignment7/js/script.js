@@ -60,11 +60,46 @@ function setup() {
     source: 'wave',
   });
 
+  var distortion = new Pizzicato.Effects.Distortion({
+    gain: 1
+  });
+
+  var flanger = new Pizzicato.Effects.Flanger({
+    time: 0.45,
+    speed: 0.2,
+    depth: 1,
+    feedback: 1,
+    mix: 0.5
+});
+
+  var tremolo = new Pizzicato.Effects.Tremolo({
+    speed: 1.81,
+    depth: 1,
+    mix: 1
+  });
+
+  var stereoPanner = new Pizzicato.Effects.StereoPanner({
+    pan: -1
+  });
+
+  var dubDelay = new Pizzicato.Effects.DubDelay({
+    feedback: 0.9,
+    time: 0.5,
+    mix: 0.5,
+    cutoff: 800
+});
+
    hihatFX = new Pizzicato.Sound('assets/sounds/hihat.wav');
 
    kickFX = new Pizzicato.Sound('assets/sounds/kick.wav');
 
    snareFX = new Pizzicato.Sound('assets/sounds/snare.wav');
+
+   kickFX.addEffect(stereoPanner);
+   kickFX.addEffect(dubDelay);
+   //kickFX.addEffect(distortion);
+   snareFX.addEffect(tremolo);
+   synthFX.addEffect(flanger);
 }
 
 
@@ -78,27 +113,26 @@ function draw() {
 
 function mousePressed() {
 if (!newFrequency) {
-  if (!timer) {
     playNote();
     setInterval(playDrum,250);
-    }
   }
 }
 
 function playNote() {
-     newFrequency = random(frequencies);
-     if (newFrequency == "") {
-       synthFX.stop();
+   newFrequency = random(frequencies);
+   if (newFrequency == "") {
+     synthFX.stop();
+   }
+
+   else {
+     synthFX.frequency = newFrequency;
+     synthFX.play();
      }
 
-     else {
-       newFrequency = synthFX.frequency;
-       synthFX.play();
-       }
-    setTimeout(function(){
-      playNote();
-    },random(50,1000));
-  }
+  setTimeout(function(){
+    playNote();
+  },random(50,1000));
+}
 
 function playDrum() {
   var symbols = pattern[patternIndex];
