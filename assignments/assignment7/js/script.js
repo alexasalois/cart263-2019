@@ -39,6 +39,7 @@ var pattern = [
 
 let newFrequency;
 var patternIndex = 0;
+var timer;
 
 var synthFX;
 var kickFX;
@@ -77,16 +78,27 @@ function draw() {
 
 function mousePressed() {
 if (!newFrequency) {
-  setInterval(playNote,500);
-  setInterval(playDrum,250);
+  if (!timer) {
+    playNote();
+    setInterval(playDrum,250);
+    }
   }
 }
 
 function playNote() {
-  newFrequency = random(frequencies);
-  synthFX.frequency = newFrequency;
-  synthFX.play();
-}
+     newFrequency = random(frequencies);
+     if (newFrequency == "") {
+       synthFX.stop();
+     }
+
+     else {
+       newFrequency = synthFX.frequency;
+       synthFX.play();
+       }
+    setTimeout(function(){
+      playNote();
+    },random(50,1000));
+  }
 
 function playDrum() {
   var symbols = pattern[patternIndex];
