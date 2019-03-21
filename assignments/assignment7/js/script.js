@@ -21,6 +21,8 @@ var frequencies = [
   146.83,
   164.81,
   185.00,
+  "",
+  "",
   207.65
 ];
 
@@ -35,6 +37,7 @@ var pattern = [
   '* * *'
 ];
 
+let newFrequency;
 var patternIndex = 0;
 
 var synthFX;
@@ -61,8 +64,6 @@ function setup() {
    kickFX = new Pizzicato.Sound('assets/sounds/kick.wav');
 
    snareFX = new Pizzicato.Sound('assets/sounds/snare.wav');
-
-  playNote();
 }
 
 
@@ -74,15 +75,17 @@ function draw() {
 
 }
 
-function playNote() {
-  var newFrequency = random(frequencies);
-  synthFX.frequency = newFrequency;
-  synthFX.play();
-}
-
 function mousePressed() {
+if (!newFrequency) {
   setInterval(playNote,500);
   setInterval(playDrum,250);
+  }
+}
+
+function playNote() {
+  newFrequency = random(frequencies);
+  synthFX.frequency = newFrequency;
+  synthFX.play();
 }
 
 function playDrum() {
@@ -102,7 +105,7 @@ function playDrum() {
 
   patternIndex++;
 
-  if (patternIndex === pattern.length) {
+  if (patternIndex == pattern.length) {
     patternIndex = 0;
   }
 }
