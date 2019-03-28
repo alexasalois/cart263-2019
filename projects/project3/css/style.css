@@ -1,0 +1,53 @@
+/*********************************************
+
+This is the style file for this project.
+
+**********************************************/
+body {
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.widgets {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 150px;
+  height:600px;
+  background-color: yellow;
+}
+
+.posts {
+  position: relative;
+  border: black 1px solid;
+  padding: 15px;
+  margin: 5px;
+  width: 100%;
+}
+
+h3 {
+  font-family: 'Neucha', cursive;
+  font-size: 72px;
+  position: absolute;
+  left: 200px;
+}
+
+button {
+  position: absolute;
+  left: 620px;
+  top: 200px;
+}
+
+#textInput {
+  position: absolute;
+  width: 400px;
+  height: 60px;
+  left: 200px;
+  top: 200px;
+}
+
+#blogPosts {
+  position: absolute;
+  left: 195px;
+  top:275px;
+  width: 372px;
+}
