@@ -21,10 +21,21 @@ let $availableWords = [
   "They",
   "like",
   "hate",
+  "are",
+  "is",
   "dogs",
   "cats",
   "blue",
-  "pink"
+  "pink",
+  "men",
+  "women",
+  "society",
+  "beautiful",
+  "ugly",
+  "disgusting",
+  "bad",
+  "gross",
+  "cute",
 ]
 
 $(document).ready(function() {
@@ -35,11 +46,12 @@ function checkWords() {
   $approvedWords = 0;
   let str = $("#textInput").val();
   let blogWords = str.split(" ");
+  $("#textInput").autocomplete({source: $availableWords});
   console.log(blogWords);
 
   for (let i=0; i<blogWords.length; i++) {
     for (let cpt=0; cpt<$availableWords.length; cpt++) {
-      if (blogWords[i] == $availableWords[cpt]){
+      if (blogWords[i].toLowerCase() == $availableWords[cpt].toLowerCase()){
         console.log("iss ok");
         console.log($approvedWords);
         $approvedWords+=1;
@@ -52,13 +64,10 @@ function checkWords() {
   }
 }
 
-
-
 function writePost() {
   $textInput = $("#textInput").val();
   $blogPost = "<div class='posts'>"+$textInput+"</div>";
   // document.getElementById("displayPost").innerHTML = $blogPost;
   $("#blogPosts").prepend($blogPost);
-  $("#textInput").autocomplete({source: $availableWords});
   $("#textInput").val('');
 }

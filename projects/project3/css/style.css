@@ -3,17 +3,36 @@
 This is the style file for this project.
 
 **********************************************/
-body {
+* {
   font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 20px;
 }
 
-.widgets {
+#widget1 {
   position: absolute;
   top: 30px;
   left: 30px;
   width: 150px;
   height:600px;
   background-color: yellow;
+}
+
+#widget2 {
+  position: absolute;
+  top: 560px;
+  left: 60px;
+  width: 60px;
+  height:200px;
+  background-color: red;
+}
+
+#widget3 {
+  position: absolute;
+  top: 50px;
+  left: 900px;
+  width: 150px;
+  height:600px;
+  background-color: green;
 }
 
 .posts {
