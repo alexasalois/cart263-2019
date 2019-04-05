@@ -1,0 +1,72 @@
+/*********************************************
+
+This is the style file for this project.
+
+**********************************************/
+* {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 20px;
+}
+
+#widget1 {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 150px;
+  height:600px;
+  background-color: yellow;
+}
+
+#widget2 {
+  position: absolute;
+  top: 560px;
+  left: 60px;
+  width: 60px;
+  height:200px;
+  background-color: red;
+}
+
+#widget3 {
+  position: absolute;
+  top: 50px;
+  left: 900px;
+  width: 150px;
+  height:600px;
+  background-color: green;
+}
+
+.posts {
+  position: relative;
+  border: black 1px solid;
+  padding: 15px;
+  margin: 5px;
+  width: 100%;
+}
+
+h3 {
+  font-family: 'Neucha', cursive;
+  font-size: 72px;
+  position: absolute;
+  left: 200px;
+}
+
+button {
+  position: absolute;
+  left: 620px;
+  top: 200px;
+}
+
+#textInput {
+  position: absolute;
+  width: 400px;
+  height: 60px;
+  left: 200px;
+  top: 200px;
+}
+
+#blogPosts {
+  position: absolute;
+  left: 195px;
+  top:275px;
+  width: 372px;
+}
