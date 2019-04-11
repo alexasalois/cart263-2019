@@ -11,6 +11,12 @@ author, and this description to match your project!
 ******************/
 let $blogPost;
 let $textInput;
+
+let loveCounter = 0;
+
+let positive = 0;
+let negative =0;
+
 let $approvedWords = 0;
 let $availableWords = [
   "I",
@@ -41,7 +47,7 @@ let $availableWords = [
   "a",
   "person",
   "life",
-  "immigrants"
+  "and"
 ]
 
 let $availablePositiveWords = [
@@ -108,37 +114,140 @@ let $availableNegativeWords = [
   "sex"
 ]
 
+let $positiveComments = [
+  "Omg queen",
+  "Woah #powerful",
+  "So true!!!!!",
+  "Honestly same",
+  "You are so right!!",
+  "totally agree.",
+  "SAY IT LOUDER FOR THE PEOPLE IN THE BACK",
+  "Yessssssss thank you",
+  "DAMN. u right",
+  "Sharing this!!!!",
+  "I wish I could like this post twice.",
+  "so relatable",
+  "You are amazing",
+  "omg i love you",
+  "you're awesome!!",
+  "Such a good message.",
+  "Well said.",
+  "FINALLY someone says it",
+  "This is great.",
+  "Everyone needs to hear this."
+]
 
+let $negativeComments = [
+  "Wtf?",
+  "This is troubling...",
+  "Why would you say that?",
+  "what's wrong with you",
+  "WOAH you really went there.",
+  "shut the fuck up",
+  "gtfo",
+  "Honestly you need to stop.",
+  "Reporting this.",
+  "You are immature.",
+  "How could you say that",
+  "You're fucked.",
+  "you need to stop right now",
+  "what the actual",
+  "I can't",
+  "How is this allowed",
+  "SHUT UP",
+  "This is so stupid.",
+  "can everyone report this pls thx",
+  "...says the priviliged."
+]
 
 $(document).ready(function() {
   console.log("welcome");
 });
 
+// function that suggests the available words and checks all the words to make sure it is okay to post
 function checkWords() {
   $approvedWords = 0;
   let str = $("#textInput").val();
+
+  // split the blog post to check every word individually
   let blogWords = str.split(" ");
   $("#textInput").autocomplete({source: $availableWords});
   console.log(blogWords);
 
+  // go through the blog post and check every word to see if it corresponds to any of the available arrays
   for (let i=0; i<blogWords.length; i++) {
     for (let cpt=0; cpt<$availableWords.length && $availablePositiveWords.length && $availableNegativeWords.length; cpt++) {
-      if (blogWords[i].toLowerCase() == $availableWords[cpt].toLowerCase() || blogWords[i].toLowerCase() == $availablePositiveWords[cpt].toLowerCase() || blogWords[i].toLowerCase() == $availableNegativeWords[cpt].toLowerCase()){
-        $approvedWords+=1;
-        // create individual ifs, negative give -1 and pos +1. create variable that acts as external counter, which if higher or lower than zero, good or bad response. have counter reset to 0 outside of loop after calculation. if zero, the response will be dependant on another variable that tallies up cumulative good or bad activity, and if you are bad, 0 is bad
+
+        switch(blogWords[i]) {
+          // if neutral word, just accept it without influencing the love counter
+          case $availableWords[cpt].toLowerCase(): $approvedWords+=1;
+          break;
+
+          // if it's positive, count it as plus one
+          case $availablePositiveWords[cpt].toLowerCase():
+            $approvedWords+=1;
+            positive+=1;
+          break;
+
+          // if it's negative, count it as a negative plus one
+          case $availableNegativeWords[cpt].toLowerCase():
+            $approvedWords+=1;
+            negative+=1;
+        }
       }
     }
-  }
 
+  // If all the words are into the array, allow the post to be published
   if ($approvedWords === blogWords.length) {
     writePost();
   }
 }
 
+// Writing the post: creates a div with the post and check if its mostly positive or negative
 function writePost() {
   $textInput = $("#textInput").val();
   $blogPost = "<div class='posts'>"+$textInput+"</div>";
   // document.getElementById("displayPost").innerHTML = $blogPost;
   $("#blogPosts").prepend($blogPost);
   $("#textInput").val('');
+  checkLove();
+}
+
+// if its positive, add 1 to the love counter (checks your influence), if negative, minus one
+function checkLove() {
+  if (positive > negative) {
+    loveCounter+=1;
+    positiveResponse();
+  }
+
+  else if (negative > positive) {
+    loveCounter-=1;
+    negativeResponse();
+  }
+
+  // reset the positive and negative counters
+  positive = 0;
+  negative = 0;
+}
+
+function positiveResponse() {
+  let numberOfComments = Math.floor(Math.random()*3)+2;
+  let positivePosts;
+
+  for (let i=0; i <= numberOfComments; i++) {
+   positivePosts = "<div id ='comment'>"+$positiveComments[Math.floor(Math.random()*$positiveComments.length)]+"</div>";
+   console.log($positiveComments[Math.floor(Math.random()*$positiveComments.length)]);
+   $("comments").prepend(positivePosts);
+ }
+}
+
+function negativeResponse() {
+  let numberOfComments = Math.floor(Math.random()*3)+2;
+  let negativePosts;
+
+  for (let i=0; i <= numberOfComments; i++) {
+   negativePosts = "<div id ='comment'>"+$negativeComments[Math.floor(Math.random()*$negativeComments.length)]+"</div>";
+   console.log($negativeComments[Math.floor(Math.random()*$negativeComments.length)]);
+   $("comments").prepend(negativePosts);
+ }
 }
