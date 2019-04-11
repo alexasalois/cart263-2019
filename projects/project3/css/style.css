@@ -6,33 +6,38 @@ This is the style file for this project.
 * {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 20px;
+  padding: 0;
+  margin: 0;
 }
 
 #widget1 {
   position: absolute;
   top: 30px;
-  left: 30px;
+  left: 50px;
   width: 150px;
   height:600px;
   background-color: yellow;
+  z-index: -1;
 }
 
 #widget2 {
   position: absolute;
-  top: 560px;
+  top: 520px;
   left: 60px;
   width: 60px;
   height:200px;
   background-color: red;
+  z-index: -1;
 }
 
 #widget3 {
   position: absolute;
   top: 50px;
-  left: 900px;
+  left: 1300px;
   width: 150px;
   height:600px;
   background-color: green;
+  z-index: -1;
 }
 
 #textInput, #blogPosts, h3 {
@@ -51,27 +56,34 @@ h3 {
   font-family: 'Neucha', cursive;
   font-size: 72px;
   position: absolute;
-  left: 200px;
+  left: 100px;
+  top: 50px;
 }
 
-button {
+#postBtn {
   position: absolute;
-  left: 620px;
+  left: 960px;
   top: 200px;
+}
+
+h6 {
+  left: 550px;
+  top: 170px;
+  position: absolute;
 }
 
 #textInput {
   position: absolute;
   width: 400px;
   height: 60px;
-  left: 200px;
+  left: 550px;
   top: 200px;
 }
 
 #blogPosts {
   position: absolute;
   background-color: white;
-  left: 195px;
+  left: 545px;
   top:275px;
   width: 372px;
 }
@@ -87,4 +99,24 @@ button {
   background-color: white;
   border: black 1px solid;
   padding: 20px;
+}
+
+#login {
+  width: 100%;
+  height: 100%;
+}
+
+#form {
+  display: flex;
+  flex-flow: column wrap;
+  width: 200px;
+  position: absolute;
+  top: 25%;
+  left: 45%;
+
+}
+
+#btnConnect {
+  margin-top: 20px;
+  width:50%;
 }

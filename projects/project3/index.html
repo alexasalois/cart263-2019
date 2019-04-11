@@ -28,11 +28,29 @@
 
 <body>
 
+<div id = "login">
+  <div id= "form">
+    <div>
+      <label for= "usernameInput">username:</label>
+      <input type="text" id= "usernameInput" value="">
+    </div>
+
+    <div>
+      <label for="passwordInput">password:</label>
+      <input type="text" id= "passwordInput" value="">
+    </div>
+
+    <button id = "btnConnect">connect</button>
+  </div>
+</div>
+
+<div id= "mainpage">
   <h3>Koubs@f</h3>
+  <h6>What's on your mind?</h6>
 
   <input type="text" id="textInput" value="">
 
-  <button onclick="checkWords()">Post</button>
+  <button onclick="checkWords()"id="postBtn">Post</button>
 
   <div class="widgets">
     <div id="widget1"></div>
@@ -43,6 +61,7 @@
   <div id="blogPosts"></div>
 
   <div id="comments"></div>
+</div>
 
 </body>
 

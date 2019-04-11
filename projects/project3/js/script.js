@@ -12,6 +12,9 @@ author, and this description to match your project!
 let $blogPost;
 let $textInput;
 
+let username;
+let password;
+
 let loveCounter = 0;
 
 let positive = 0;
@@ -19,37 +22,37 @@ let negative =0;
 
 let $approvedWords = 0;
 let $availableWords = [
-  "I",
-  "You",
-  "We",
-  "She",
-  "He",
-  "They",
-  "are",
-  "is",
-  "talk",
-  "want",
-  "need",
-  "have",
-  "find",
-  "your",
-  "my",
-  "their",
-  "them",
-  "to",
-  "men",
-  "women",
-  "society",
-  "food",
-  "dogs",
-  "cats",
-  "people",
-  "a",
-  "person",
-  "life",
-  "love",
-  "like",
-  "and"
+  "I like to laugh at",
+  "I like to see",
+  "I enjoy watching",
+  "I hate",
+  "I love",
+  "They like",
+  "I like",
+  "I dislike",
+  "They love",
+  "We want",
+  "We need",
+  "I need",
+  "I enjoy talking about",
+  "We need to think about",
+  "We need to discuss on",
+  "I think that",
+  "We should all consider that",
+  "I want to destroy",
+  "I want to talk about",
+  "I need to denounce",
+  "I have to disagree on",
+  "We need to destroy",
+  "We have to value",
+  "I value",
+  "We do not like",
+  "I do not tolerate",
+  "I tolerate",
+  "I look up to",
+  "I admire",
+  "I loathe",
+  "Don't talk to me about"
 ]
 
 let $availablePositiveWords = [
@@ -167,8 +170,21 @@ let $negativeComments = [
 ]
 
 $(document).ready(function() {
-  console.log("welcome");
+  $("#mainpage").css("display","none");
+  $("#btnConnect").on("click",login);
+  $("#textInput").autocomplete({
+    source: $availableWords
+  });
 });
+
+function login() {
+  if ($("#usernameInput").val() != "" && $("#passwordInput").val() != "") {
+    username = $("#usernameInput").val();
+    password = $("#passwordInput").val();
+    $("#mainpage").css("display","block");
+    $("#login").css("display","none");
+  }
+}
 
 // function that suggests the available words and checks all the words to make sure it is okay to post
 function checkWords() {
@@ -177,8 +193,6 @@ function checkWords() {
 
   // split the blog post to check every word individually
   let blogWords = str.split(" ");
-  $("#textInput").autocomplete({source: $availableWords});
-  console.log(blogWords);
 
   // go through the blog post and check every word to see if it corresponds to any of the available arrays
   for (let i=0; i<blogWords.length; i++) {
@@ -186,27 +200,28 @@ function checkWords() {
 
         switch(blogWords[i]) {
           // if neutral word, just accept it without influencing the love counter
-          case $availableWords[cpt].toLowerCase(): $approvedWords+=1;
-          break;
+          //case $availableWords[cpt].toLowerCase(): $approvedWords+=1;
+          //break;
 
           // if it's positive, count it as plus one
           case $availablePositiveWords[cpt].toLowerCase():
-            $approvedWords+=1;
+          //  $approvedWords+=1;
             positive+=1;
           break;
 
           // if it's negative, count it as a negative plus one
           case $availableNegativeWords[cpt].toLowerCase():
-            $approvedWords+=1;
+          //  $approvedWords+=1;
             negative+=1;
+            console.log(negative);
         }
       }
     }
 
   // If all the words are into the array, allow the post to be published
-  if ($approvedWords === blogWords.length) {
+//  if ($approvedWords === blogWords.length) {
     writePost();
-  }
+//  }
 }
 
 // Writing the post: creates a div with the post and check if its mostly positive or negative
