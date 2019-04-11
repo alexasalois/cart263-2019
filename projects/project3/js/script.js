@@ -47,17 +47,21 @@ let $availableWords = [
   "a",
   "person",
   "life",
+  "love",
+  "like",
   "and"
 ]
 
 let $availablePositiveWords = [
   "beautiful",
+  "proud",
+  "accomplishments",
   "awesome",
   "feminism",
   "perfect",
   "freedom",
   "amazing",
-  "love",
+  "positivity",
   "admire",
   "accomplished",
   "goal",
@@ -86,6 +90,8 @@ let $availableNegativeWords = [
   "hate",
   "dislike",
   "repulsive",
+  "nasty",
+  "fuck",
   "bad",
   "ugly",
   "gross",
@@ -233,21 +239,35 @@ function checkLove() {
 function positiveResponse() {
   let numberOfComments = Math.floor(Math.random()*3)+2;
   let positivePosts;
+  let positionTop;
+  let positionLeft;
 
   for (let i=0; i <= numberOfComments; i++) {
-   positivePosts = "<div id ='comment'>"+$positiveComments[Math.floor(Math.random()*$positiveComments.length)]+"</div>";
-   console.log($positiveComments[Math.floor(Math.random()*$positiveComments.length)]);
-   $("comments").prepend(positivePosts);
+   positivePosts = "<div id ='comment"+i+"' class = 'comment'>"+$positiveComments[Math.floor(Math.random()*$positiveComments.length)]+"</div>";
+
+   $("#comments").prepend(positivePosts);
+   positionTop = Math.floor(Math.random()*500)+0;
+   positionLeft = Math.floor(Math.random()*500)+0;
+
+   $("#comment"+i).css("top", positionTop);
+   $("#comment"+i).css("left", positionLeft);
  }
 }
 
 function negativeResponse() {
   let numberOfComments = Math.floor(Math.random()*3)+2;
   let negativePosts;
+  let positionTop;
+  let positionLeft;
 
   for (let i=0; i <= numberOfComments; i++) {
-   negativePosts = "<div id ='comment'>"+$negativeComments[Math.floor(Math.random()*$negativeComments.length)]+"</div>";
-   console.log($negativeComments[Math.floor(Math.random()*$negativeComments.length)]);
-   $("comments").prepend(negativePosts);
+   negativePosts = "<div id ='comment"+i+"' class = 'comment'>"+$negativeComments[Math.floor(Math.random()*$negativeComments.length)]+"</div>";
+
+   $("#comments").prepend(negativePosts);
+   positionTop = Math.floor(Math.random()*500)+0;
+   positionLeft = Math.floor(Math.random()*500)+0;
+
+   $("#comment"+i).css("top", positionTop);
+   $("#comment"+i).css("left", positionLeft);
  }
 }

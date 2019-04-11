@@ -35,6 +35,10 @@ This is the style file for this project.
   background-color: green;
 }
 
+#textInput, #blogPosts, h3 {
+  z-index: 1000;
+}
+
 .posts {
   position: relative;
   border: black 1px solid;
@@ -66,7 +70,21 @@ button {
 
 #blogPosts {
   position: absolute;
+  background-color: white;
   left: 195px;
   top:275px;
   width: 372px;
+}
+
+#comments {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.comment {
+  position: absolute;
+  background-color: white;
+  border: black 1px solid;
+  padding: 20px;
 }
