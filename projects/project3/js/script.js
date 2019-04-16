@@ -11,12 +11,17 @@ author, and this description to match your project!
 ******************/
 let $blogPost;
 let $textInput;
+
 let $name;
+let $profile;
 
 let numberOfComments;
 
 let username;
 let password;
+let friends = 200;
+let influence = 150;
+let ranking= 97625;
 
 let loveCounter = 0;
 
@@ -181,22 +186,39 @@ $(document).ready(function() {
 });
 
 function login() {
+  // what the game does when you begin! displays log in screen, then runs the main events
   if ($("#usernameInput").val() != "" && $("#passwordInput").val() != "") {
     username = $("#usernameInput").val();
     password = $("#passwordInput").val();
     $("#mainpage").css("display","block");
     $("#login").css("display","none");
 
+    displayStats();
     displayName();
+    playMusic();
   }
 }
 
 function displayName() {
+  // welcome the user with the personalized username
   $name = "<h4 id='welcomeMessage'> Welcome "+username+"!</h4>";
   $('body').prepend($name);
-  console.log($name);
+}
 
-  playMusic();
+function displayStats() {
+  // show influence of the profile, and display it
+  $profile = "<div id='stats'> Friends: "+friends+" Influence Points: "+influence+" Ranking: "+ranking+"</h4>";
+
+  // if the stats are already displayed, remove them before adding the updated ones...
+  if ($("#stats").length) {
+    $("#stats").remove();
+    $('body').prepend($profile);
+  }
+
+  // else don't do anything...
+  else {
+    $('body').prepend($profile);
+  }
 }
 
 // function that suggests the available words and checks all the words to make sure it is okay to post
@@ -254,10 +276,12 @@ function checkLove() {
     loveCounter-=1
   }
 
+   // if your reputation is good, people like what you post (no matter what...)
    if (loveCounter > 0) {
      positiveResponse();
    }
 
+   // if your reputation is bad, people dismiss you (no matter what...)
    else if (loveCounter < 0) {
      negativeResponse();
    }
@@ -272,7 +296,16 @@ function checkLove() {
 
 // when a post is considered positive, people are happy and comments pop up
 function positiveResponse() {
-//  loveCounter=loveCounter+1;
+  friends = friends+50;
+
+  if (ranking-100 > 1) {
+    ranking = ranking-100;
+  }
+
+  influence = influence+50;
+
+  displayStats();
+
   let numberOfComments = Math.floor(Math.random()*3)+2;
   let positivePosts;
   let positionTop;
@@ -294,7 +327,7 @@ function positiveResponse() {
 
 // when a post is considered negative, people are not happy with you and comment about it
 function negativeResponse() {
-//  loveCounter=loveCounter-1;
+  displayStats();
   numberOfComments = Math.floor(Math.random()*3)+2;
   let negativePosts;
   let positionTop;
@@ -316,6 +349,8 @@ function negativeResponse() {
 
 function updateLove() {
   if (loveCounter >= 5) {
+    friends = friends*2;
+    ranking = 1;
     numberOfComments = numberOfComments*2;
   }
 
