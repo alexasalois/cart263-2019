@@ -120,3 +120,16 @@ h6 {
   margin-top: 20px;
   width:50%;
 }
+
+#welcomeMessage {
+  top: 130px;
+  left: 210px;
+  font-size: 30px;
+  position: absolute;
+}
+
+ul {
+  display: block;
+  list-style: none;
+  display: none;
+}

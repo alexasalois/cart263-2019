@@ -11,6 +11,9 @@ author, and this description to match your project!
 ******************/
 let $blogPost;
 let $textInput;
+let $name;
+
+let numberOfComments;
 
 let username;
 let password;
@@ -27,7 +30,7 @@ let $availableWords = [
   "I enjoy watching",
   "I hate",
   "I love",
-  "They like",
+  "Society is",
   "I like",
   "I dislike",
   "They love",
@@ -36,8 +39,8 @@ let $availableWords = [
   "I need",
   "I enjoy talking about",
   "We need to think about",
-  "We need to discuss on",
-  "I think that",
+  "I think men are",
+  "I think that women are",
   "We should all consider that",
   "I want to destroy",
   "I want to talk about",
@@ -102,12 +105,12 @@ let $availableNegativeWords = [
   "murder",
   "kill",
   "pain",
-  "inflict",
+  "should be ashamed",
   "torture",
   "deported",
   "filthy",
   "annoying",
-  "corruption",
+  "corruption is good",
   "corrupted",
   "awful",
   "reject",
@@ -183,7 +186,17 @@ function login() {
     password = $("#passwordInput").val();
     $("#mainpage").css("display","block");
     $("#login").css("display","none");
+
+    displayName();
   }
+}
+
+function displayName() {
+  $name = "<h4 id='welcomeMessage'> Welcome "+username+"!</h4>";
+  $('body').prepend($name);
+  console.log($name);
+
+  playMusic();
 }
 
 // function that suggests the available words and checks all the words to make sure it is okay to post
@@ -217,12 +230,9 @@ function checkWords() {
         }
       }
     }
-
-  // If all the words are into the array, allow the post to be published
-//  if ($approvedWords === blogWords.length) {
+    // after checking the value of the words, generate the post
     writePost();
-//  }
-}
+  }
 
 // Writing the post: creates a div with the post and check if its mostly positive or negative
 function writePost() {
@@ -249,40 +259,82 @@ function checkLove() {
   // reset the positive and negative counters
   positive = 0;
   negative = 0;
+
+  updateLove();
 }
 
+// when a post is considered positive, people are happy and comments pop up
 function positiveResponse() {
   let numberOfComments = Math.floor(Math.random()*3)+2;
   let positivePosts;
   let positionTop;
   let positionLeft;
 
+  // loop to generate random comments from the specific list of positive options
   for (let i=0; i <= numberOfComments; i++) {
    positivePosts = "<div id ='comment"+i+"' class = 'comment'>"+$positiveComments[Math.floor(Math.random()*$positiveComments.length)]+"</div>";
 
+   // display the comments randomly in the window
    $("#comments").prepend(positivePosts);
-   positionTop = Math.floor(Math.random()*500)+0;
-   positionLeft = Math.floor(Math.random()*500)+0;
+   positionTop = Math.floor(Math.random()*700)+0;
+   positionLeft = Math.floor(Math.random()*1250)+0;
 
    $("#comment"+i).css("top", positionTop);
    $("#comment"+i).css("left", positionLeft);
  }
 }
 
+// when a post is considered negative, people are not happy with you and comment about it
 function negativeResponse() {
-  let numberOfComments = Math.floor(Math.random()*3)+2;
+  numberOfComments = Math.floor(Math.random()*3)+2;
   let negativePosts;
   let positionTop;
   let positionLeft;
 
+  // loop to generate a few comments from the list of negative options
   for (let i=0; i <= numberOfComments; i++) {
    negativePosts = "<div id ='comment"+i+"' class = 'comment'>"+$negativeComments[Math.floor(Math.random()*$negativeComments.length)]+"</div>";
 
+   // display the comments randomly
    $("#comments").prepend(negativePosts);
-   positionTop = Math.floor(Math.random()*500)+0;
-   positionLeft = Math.floor(Math.random()*500)+0;
+   positionTop = Math.floor(Math.random()*700)+0;
+   positionLeft = Math.floor(Math.random()*1250)+0;
 
    $("#comment"+i).css("top", positionTop);
    $("#comment"+i).css("left", positionLeft);
  }
+}
+
+function updateLove() {
+  if (loveCounter += 5) {
+    numberOfComments = numberOfComments*2;
+    console.log(numberOfComments);
+  }
+
+  else if (loveCounter -= -5) {
+    numberOfComments = numberOfComments*3;
+  }
+}
+
+function playMusic() {
+  $("#audioPlayer")[0].src = $("#playlist li a")[0];
+ //  $("music").musicPlayer({
+ //    // elements: ['information', 'controls', 'progress', 'time', 'volume'],
+ //    // onPlay: function() {
+ //    //    $('body').css('background', 'black');
+ //    // }
+ //
+ //   autoPlay: false,
+ //   volume: 80,
+ //   loop: false,
+ //   timeSeparator: ' / ',
+ //   playerAbovePlaylist: true,
+ //   infoElements: ['title' , 'artist'] ,
+ //   elements: ['artwork', 'information', 'controls', 'progress', 'time', 'volume'],
+ //   timeElements: ['current', 'duration'],
+ //   controlElements: ['backward', 'play', 'forward', 'stop'],
+ //
+ //
+ //
+ // });
 }
