@@ -9,6 +9,10 @@ This is a template. You must fill in the title,
 author, and this description to match your project!
 
 ******************/
+let $avatar;
+let enemy = [];
+let projectiles = [];
+
 let $blogPost;
 let $textInput;
 
@@ -387,13 +391,41 @@ function playMusic() {
 }
 
 function startMiniGame() {
-  let avatar;
-  let enemy = [];
-  let projectiles = [];
-
   $("#playGame").on("click", runGame)
   }
 
 function runGame() {
   $("#playGame").remove();
+  $avatar = "<div id='avatar'></div>";
+
+  $("#miniGame").append($avatar);
+  moveAvatar();
 }
+
+function moveAvatar() {
+  $(document).keydown(function(e){
+    let avatarLeft = $("#avatar").position().left;
+
+    console.log(avatarLeft);
+
+    switch (e.which){
+    case 37:
+    //left arrow key, move left!
+        if (avatarLeft-20 > 0) {
+        $("#avatar").finish().animate({
+              left: "-=20"
+        });
+      }
+        break;
+
+    case 39:
+    //right arrow key, move right!
+        if (avatarLeft+20 < 280) {
+        $("#avatar").finish().animate({
+            left: "+=20"
+        });
+      }
+        break;
+      }
+    });
+  }
