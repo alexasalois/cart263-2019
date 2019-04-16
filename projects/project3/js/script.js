@@ -25,7 +25,7 @@ let username;
 let password;
 let friends = 200;
 let influence = 150;
-let ranking= 97625;
+let ranking= 57625;
 
 let loveCounter = 0;
 
@@ -304,7 +304,7 @@ function positiveResponse() {
   friends = friends+50;
 
   if (ranking-100 > 1) {
-    ranking = ranking-100;
+    ranking = ranking-10500;
   }
 
   influence = influence+50;

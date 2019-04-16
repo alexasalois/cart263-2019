@@ -117,6 +117,7 @@ h6 {
   background-color: white;
   border: black 1px solid;
   padding: 20px;
+  z-index: -99999;
 }
 
 #login {
