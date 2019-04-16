@@ -4,7 +4,6 @@ This is the style file for this project.
 
 **********************************************/
 * {
-  font-family: 'Open Sans Condensed', sans-serif;
   font-size: 20px;
   padding: 0;
   margin: 0;
@@ -50,6 +49,7 @@ This is the style file for this project.
   padding: 15px;
   margin: 5px;
   width: 100%;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 h3 {
@@ -61,6 +61,7 @@ h3 {
 }
 
 #postBtn {
+  font-family: 'Open Sans Condensed', sans-serif;
   position: absolute;
   left: 960px;
   top: 200px;
@@ -70,9 +71,11 @@ h6 {
   left: 550px;
   top: 170px;
   position: absolute;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 #textInput {
+  font-family: 'Open Sans Condensed', sans-serif;
   position: absolute;
   width: 400px;
   height: 60px;
@@ -81,6 +84,7 @@ h6 {
 }
 
 #blogPosts {
+  font-family: 'Open Sans Condensed', sans-serif;
   position: absolute;
   background-color: white;
   left: 545px;
@@ -89,6 +93,7 @@ h6 {
 }
 
 #comments {
+  font-family: "Neucha", cursive;
   position: relative;
   width: 100%;
   height: 100%;
@@ -102,11 +107,13 @@ h6 {
 }
 
 #login {
+  font-family: 'Open Sans Condensed', sans-serif;
   width: 100%;
   height: 100%;
 }
 
 #form {
+  font-family: 'Open Sans Condensed', sans-serif;
   display: flex;
   flex-flow: column wrap;
   width: 200px;
@@ -117,11 +124,13 @@ h6 {
 }
 
 #btnConnect {
+  font-family: "Neucha", cursive;
   margin-top: 20px;
   width:50%;
 }
 
 #welcomeMessage {
+  font-family: 'Open Sans Condensed', sans-serif;
   top: 130px;
   left: 210px;
   font-size: 30px;
@@ -129,7 +138,43 @@ h6 {
 }
 
 ul {
+  font-family: "Neucha", cursive;
   display: block;
+  text-decoration: none;
+  color: white;
   list-style: none;
-  display: none;
+}
+
+.music {
+  font-family: "Neucha", cursive;
+  padding: 20px;
+  top: 100px;
+  right: 70px;
+  position: absolute;
+  background-color: rgba(0,0,255,0.5);
+  color: white;
+}
+
+#audioPlayer {
+  padding: 20px;
+  position: relative;
+}
+
+#sidebar {
+  position: absolute;
+  top: 220px;
+  left: 100px;
+  background-color: rgba(0,0,255,0.5);
+  padding: 20px;
+}
+
+#sections {
+  font-family: "Neucha", cursive;
+  position: relative;
+  color: white;
+  padding: 5px;
+}
+
+#usernameInput, #passwordInput {
+  font-family: 'Open Sans Condensed', sans-serif;
 }

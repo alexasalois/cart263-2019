@@ -317,24 +317,26 @@ function updateLove() {
 }
 
 function playMusic() {
-  $("#audioPlayer")[0].src = $("#playlist li a")[0];
- //  $("music").musicPlayer({
- //    // elements: ['information', 'controls', 'progress', 'time', 'volume'],
- //    // onPlay: function() {
- //    //    $('body').css('background', 'black');
- //    // }
- //
- //   autoPlay: false,
- //   volume: 80,
- //   loop: false,
- //   timeSeparator: ' / ',
- //   playerAbovePlaylist: true,
- //   infoElements: ['title' , 'artist'] ,
- //   elements: ['artwork', 'information', 'controls', 'progress', 'time', 'volume'],
- //   timeElements: ['current', 'duration'],
- //   controlElements: ['backward', 'play', 'forward', 'stop'],
- //
- //
- //
- // });
+  var currentSong = 0;
+   $("#audioPlayer")[0].src = $("#playlist li a")[0];
+   $("#audioPlayer")[0].play();
+   $("#playlist li a").click(function(e){
+     e.preventDefault();
+     $("#audioPlayer")[0].src = this;
+     $("#audioPlayer")[0].play();
+     $("#playlist li").removeClass("current-song");
+     currentSong = $(this).parent().index();
+     $(this).parent().addClass("current-song");
+   });
+
+     $("#audioPlayer")[0].addEventListener("ended", function(){
+      currentSong++;
+      if(currentSong == $("#playlist li a").length) {
+       currentSong = 0;
+       $("#playlist li").removeClass("current-song");
+       $("#playlist li:eq("+currentSong+")").addClass("current-song");
+       $("#audioPlayer")[0].src = $("#playlist li a")[currentSong].href;
+       $("#audioPlayer")[0].play();
+     }
+   });
 }
