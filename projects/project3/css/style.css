@@ -7,6 +7,7 @@ This is the style file for this project.
   font-size: 20px;
   padding: 0;
   margin: 0;
+  font-family: "Open Sans Condensed", sans-serif;
 }
 
 #widget1 {
@@ -101,6 +102,7 @@ h6 {
 }
 
 .comment {
+  font-family: "Neucha", cursive;
   position: absolute;
   background-color: white;
   border: black 1px solid;
@@ -184,7 +186,33 @@ ul {
   position: absolute;
   left: 555px;
   font-family: "Neucha", cursive;
+  margin: 10px;
   padding: 20px;
   color: white;
   background-color: rgba(0, 0, 255, 0.5);
+}
+
+#miniGame {
+  width: 320px;
+  height: 250px;
+  left: 150px;
+  top: 450px;
+  border: black 1px solid;
+  background-color: white;
+  position: absolute;
+}
+
+#playGame {
+  font-family: "Neucha", cursive;
+  padding: 5px;
+  position: relative;
+  left: 40%;
+  top: 40%;
+}
+
+#miniGame h5 {
+  font-family: "Neucha", cursive;
+  position: absolute;
+  top: -30px;
+  left: 120px;
 }

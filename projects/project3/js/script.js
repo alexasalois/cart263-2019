@@ -196,6 +196,7 @@ function login() {
     displayStats();
     displayName();
     playMusic();
+    startMiniGame();
   }
 }
 
@@ -360,6 +361,7 @@ function updateLove() {
 }
 
 function playMusic() {
+  // play and display songs
   var currentSong = 0;
    $("#audioPlayer")[0].src = $("#playlist li a")[0];
    $("#playlist li a").click(function(e){
@@ -371,6 +373,7 @@ function playMusic() {
      $(this).parent().addClass("current-song");
    });
 
+     // if song ends, play next one!
      $("#audioPlayer")[0].addEventListener("ended", function(){
       currentSong++;
       if(currentSong == $("#playlist li a").length) {
@@ -381,4 +384,16 @@ function playMusic() {
        $("#audioPlayer")[0].play();
      }
    });
+}
+
+function startMiniGame() {
+  let avatar;
+  let enemy = [];
+  let projectiles = [];
+
+  $("#playGame").on("click", runGame)
+  }
+
+function runGame() {
+  $("#playGame").remove();
 }
