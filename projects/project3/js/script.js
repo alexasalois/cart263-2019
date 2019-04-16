@@ -248,23 +248,31 @@ function writePost() {
 function checkLove() {
   if (positive > negative) {
     loveCounter+=1;
-    positiveResponse();
   }
 
   else if (negative > positive) {
-    loveCounter-=1;
-    negativeResponse();
+    loveCounter-=1
   }
+
+   if (loveCounter > 0) {
+     positiveResponse();
+   }
+
+   else if (loveCounter < 0) {
+     negativeResponse();
+   }
 
   // reset the positive and negative counters
   positive = 0;
   negative = 0;
 
+  // Update the counter of influence... multiply responses based on reception of blog entry
   updateLove();
 }
 
 // when a post is considered positive, people are happy and comments pop up
 function positiveResponse() {
+//  loveCounter=loveCounter+1;
   let numberOfComments = Math.floor(Math.random()*3)+2;
   let positivePosts;
   let positionTop;
@@ -286,6 +294,7 @@ function positiveResponse() {
 
 // when a post is considered negative, people are not happy with you and comment about it
 function negativeResponse() {
+//  loveCounter=loveCounter-1;
   numberOfComments = Math.floor(Math.random()*3)+2;
   let negativePosts;
   let positionTop;
@@ -306,12 +315,11 @@ function negativeResponse() {
 }
 
 function updateLove() {
-  if (loveCounter += 5) {
+  if (loveCounter >= 5) {
     numberOfComments = numberOfComments*2;
-    console.log(numberOfComments);
   }
 
-  else if (loveCounter -= -5) {
+  else if (loveCounter <= -5) {
     numberOfComments = numberOfComments*3;
   }
 }
@@ -319,7 +327,6 @@ function updateLove() {
 function playMusic() {
   var currentSong = 0;
    $("#audioPlayer")[0].src = $("#playlist li a")[0];
-   $("#audioPlayer")[0].play();
    $("#playlist li a").click(function(e){
      e.preventDefault();
      $("#audioPlayer")[0].src = this;

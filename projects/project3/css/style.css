@@ -178,3 +178,9 @@ ul {
 #usernameInput, #passwordInput {
   font-family: 'Open Sans Condensed', sans-serif;
 }
+
+#stats {
+  position: absolute;
+  left: 650px;
+  background-color: rgba(0, 0, 255, 0.5);
+}
