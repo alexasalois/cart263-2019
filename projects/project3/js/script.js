@@ -183,7 +183,13 @@ let $positiveComments = [
   "Well said.",
   "FINALLY someone says it",
   "This is great.",
-  "Everyone needs to hear this."
+  "Everyone needs to hear this.",
+  "about time someone said it",
+  "THANK YOU!!!!!",
+  "I thought i was alone thinking that!!",
+  "Inspiring",
+  "Wow, hadn't even thought of that. GENIUS",
+  "This is why freedom of speech exists"
 ]
 
 let $negativeComments = [
@@ -206,7 +212,13 @@ let $negativeComments = [
   "SHUT UP",
   "This is so stupid.",
   "can everyone report this pls thx",
-  "...says the priviliged."
+  "...says the priviliged.",
+  "You have problems wtf",
+  "THINK before you TYPE. god this is ridiculous",
+  "nobody cares about your worthless opinion",
+  "You disgust me",
+  "get help. NOT OKAY",
+  "how the hell could you even say that???"
 ]
 
 $(document).ready(function() {
@@ -312,8 +324,6 @@ function checkWords() {
     else if (positiveVerb >= 1 && positiveWord >=1) {
       positive+=1;
     }
-
-    console.log(negative);
     writePost();
   }
 
