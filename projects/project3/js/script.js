@@ -29,85 +29,117 @@ let ranking= 57625;
 
 let loveCounter = 0;
 
+let positiveWord = 0;
+let negativeWord = 0;
+let positiveVerb = 0;
+let negativeVerb = 0;
+
 let positive = 0;
-let negative =0;
+let negative = 0;
 
 let $approvedWords = 0;
-let $availableWords = [
-  "I like to laugh at",
-  "I like to see",
-  "I enjoy watching",
-  "I hate",
-  "I love",
-  "Society is",
-  "I like",
-  "I dislike",
-  "They love",
-  "We want",
-  "We need",
-  "I need",
-  "I enjoy talking about",
-  "We need to think about",
-  "I think men are",
-  "I think that women are",
-  "We should all consider that",
-  "I want to destroy",
-  "I want to talk about",
-  "I need to denounce",
-  "I have to disagree on",
-  "We need to destroy",
-  "We have to value",
-  "I value",
-  "We do not like",
-  "I do not tolerate",
-  "I tolerate",
-  "I look up to",
-  "I admire",
-  "I loathe",
-  "Don't talk to me about"
+let $availablePositiveVerbs = [
+  "love",
+  "like",
+  "adore",
+  "admire",
+  "amaze",
+  "amazes",
+  "amazed",
+  "praise",
+  "appreciate",
+  "approve",
+  "celebrate",
+  "cherish",
+  "enjoy",
+  "accomplish",
+  "accomplished",
+  "accept",
+  "dedicate",
+  "dedicated",
+  "encourage",
+  "respect",
+  "help",
+  "support"
+]
+
+let $availableNegativeVerbs = [
+  "hate",
+  "dislike",
+  "loathe",
+  "kill",
+  "murder",
+  "refuse",
+  "torture",
+  "reject",
+  "ashamed",
+  "grossed out",
+  "repulsed",
+  "assault",
+  "abuse",
+  "threaten",
+  "unwelcome",
+  "get rid of",
+  "rape",
+  "violate",
+  "strangle",
+  "hurt",
+  "punish",
+  "imprison"
 ]
 
 let $availablePositiveWords = [
-  "beautiful",
-  "proud",
-  "accomplishments",
-  "awesome",
-  "feminism",
-  "perfect",
-  "freedom",
-  "amazing",
-  "positivity",
-  "admire",
-  "accomplished",
-  "goal",
-  "goals",
-  "ambition",
-  "help",
-  "save",
-  "minorities",
+  "dogs",
+  "cats",
+  "people",
+  "immigrants",
+  "family",
+  "friends",
+  "teachers",
+  "rights",
   "equality",
-  "choice",
+  "feminism",
   "environment",
-  "important",
-  "praise",
-  "applaud",
-  "recognize",
-  "growth",
+  "planet",
+  "ocean",
+  "animals",
+  "humanitarians",
+  "humans",
+  "women",
+  "men",
+  "puppies",
+  "kittens",
+  "Starbucks",
+  "ice caps",
+  "school",
+  "chocolate",
+  "candy",
   "veganism",
-  "social justice",
-  "impressive",
-  "interesting",
-  "life-changing",
-  "thought-provoking"
+  "vegan",
+  "vegetarian",
+  "democracy",
+  "democrat",
+  "pizza",
+  "fast food",
+  "guns",
+  "Apple",
+  "iPhones"
 ]
 
 let $availableNegativeWords = [
-  "hate",
-  "dislike",
+  "video games",
+  "nazi",
+  "liars",
+  "racists",
+  "terrorists",
+  "evildoers",
+  "kidnappers",
+  "bullies",
+  "homophobes",
+  "murderers",
   "repulsive",
   "nasty",
   "fuck",
-  "bad",
   "ugly",
   "gross",
   "disgusting",
@@ -119,14 +151,10 @@ let $availableNegativeWords = [
   "deported",
   "filthy",
   "annoying",
-  "corruption is good",
-  "corrupted",
   "awful",
   "reject",
   "loser",
-  "outcasts",
   "atheists",
-  "shit",
   "periods",
   "offensive",
   "illegal",
@@ -184,9 +212,9 @@ let $negativeComments = [
 $(document).ready(function() {
   $("#mainpage").css("display","none");
   $("#btnConnect").on("click",login);
-  $("#textInput").autocomplete({
-    source: $availableWords
-  });
+//  $("#textInput").autocomplete({
+//    source: $availableWords
+  //});
 });
 
 function login() {
@@ -236,28 +264,56 @@ function checkWords() {
 
   // go through the blog post and check every word to see if it corresponds to any of the available arrays
   for (let i=0; i<blogWords.length; i++) {
-    for (let cpt=0; cpt<$availableWords.length && $availablePositiveWords.length && $availableNegativeWords.length; cpt++) {
+    for (let cpt=0; cpt<$availablePositiveVerbs.length && $availableNegativeVerbs.length && $availablePositiveWords.length && $availableNegativeWords.length; cpt++) {
 
         switch(blogWords[i]) {
-          // if neutral word, just accept it without influencing the love counter
-          //case $availableWords[cpt].toLowerCase(): $approvedWords+=1;
-          //break;
 
-          // if it's positive, count it as plus one
-          case $availablePositiveWords[cpt].toLowerCase():
-          //  $approvedWords+=1;
-            positive+=1;
+          // if it's positive verb, count it as plus one
+          case $availablePositiveVerbs[cpt].toLowerCase():
+            positiveVerb+=1;
+            console.log("1");
           break;
 
-          // if it's negative, count it as a negative plus one
+          // if it's negative verb, count it as a negative plus one
+          case $availableNegativeVerbs[cpt].toLowerCase():
+            negativeVerb+=1;
+            console.log("2");
+          break;
+
+          // if it's positive word, plus one
+          case $availablePositiveWords[cpt].toLowerCase():
+            positiveWord+=1;
+            console.log("3");
+          break;
+
+          // if it's negative word, plus one
           case $availableNegativeWords[cpt].toLowerCase():
-          //  $approvedWords+=1;
-            negative+=1;
-            console.log(negative);
+            negativeWord+=1;
+            console.log("4");
+          break;
         }
       }
     }
+
     // after checking the value of the words, generate the post
+    // check if sentence is negative or positive!
+    if (negativeVerb >= 1 && positiveWord >=1) {
+      negative+=1;
+    }
+
+    else if (negativeVerb >= 1 && negativeWord >=1) {
+      positive+=1;
+    }
+
+    else if (positiveVerb >= 1 && negativeWord >=1) {
+      negative+=1;
+    }
+
+    else if (positiveVerb >= 1 && positiveWord >=1) {
+      positive+=1;
+    }
+
+    console.log(negative);
     writePost();
   }
 
@@ -273,11 +329,11 @@ function writePost() {
 
 // if its positive, add 1 to the love counter (checks your influence), if negative, minus one
 function checkLove() {
-  if (positive > negative) {
+  if (positive >= 1) {
     loveCounter+=1;
   }
 
-  else if (negative > positive) {
+  else if (negative >= 1) {
     loveCounter-=1
   }
 
@@ -294,6 +350,10 @@ function checkLove() {
   // reset the positive and negative counters
   positive = 0;
   negative = 0;
+  positiveVerb = 0;
+  positiveWord = 0;
+  negativeWord = 0;
+  negativeVerb = 0;
 
   // Update the counter of influence... multiply responses based on reception of blog entry
   updateLove();
