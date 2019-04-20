@@ -240,7 +240,7 @@ function login() {
     displayStats();
     displayName();
     playMusic();
-    startMiniGame();
+  //  startMiniGame();
   }
 }
 
@@ -402,7 +402,17 @@ function positiveResponse() {
 
 // when a post is considered negative, people are not happy with you and comment about it
 function negativeResponse() {
+  if (friends-20 > 1) {
+    friends = friends - 20;
+  }
+
+  ranking = ranking+500;
+  influence = influence-50;
+
+  console.log(friends);
   displayStats();
+
+
   numberOfComments = Math.floor(Math.random()*3)+2;
   let negativePosts;
   let positionTop;
@@ -423,14 +433,19 @@ function negativeResponse() {
 }
 
 function updateLove() {
-  if (loveCounter >= 5) {
+  if (loveCounter > 5) {
     friends = friends*2;
     ranking = 1;
     numberOfComments = numberOfComments*2;
+    alert("Wow! Top Influencer! Nice!");
   }
 
-  else if (loveCounter <= -5) {
-    numberOfComments = numberOfComments*3;
+  else if (loveCounter < -5) {
+    console.log(loveCounter);
+    numberOfComments = numberOfComments*5;
+    ranking = 999999999999999999999;
+    friends = 0;
+    alert("Think before you type. You don't know who could be listening. ")
   }
 }
 
@@ -460,42 +475,80 @@ function playMusic() {
    });
 }
 
-function startMiniGame() {
-  $("#playGame").on("click", runGame)
-  }
 
-function runGame() {
-  $("#playGame").remove();
-  $avatar = "<div id='avatar'></div>";
-
-  $("#miniGame").append($avatar);
-  moveAvatar();
-}
-
-function moveAvatar() {
-  $(document).keydown(function(e){
-    let avatarLeft = $("#avatar").position().left;
-
-    console.log(avatarLeft);
-
-    switch (e.which){
-    case 37:
-    //left arrow key, move left!
-        if (avatarLeft-20 > 0) {
-        $("#avatar").finish().animate({
-              left: "-=20"
-        });
-      }
-        break;
-
-    case 39:
-    //right arrow key, move right!
-        if (avatarLeft+20 < 280) {
-        $("#avatar").finish().animate({
-            left: "+=20"
-        });
-      }
-        break;
-      }
-    });
-  }
+// function setup() {
+//   let canvas = createCanvas(320, 250);
+//   canvas.parent("#miniGame");
+//   background(255, 0, 200);
+// }
+//
+// function draw() {
+//   moveAvatar();
+//   spawnEnemy();
+//
+//   for (let i=0; i< enemy.length; i++) {
+//     enemy[i].display();
+//   }
+// }
+//
+//
+// function startMiniGame() {
+//   $("#playGame").on("click", function(){
+//     $("#playGame").remove();
+//   });
+//   }
+//
+//
+// function moveAvatar() {
+//   $(document).keydown(function(e){
+//     let avatarLeft = $("#avatar").position().left;
+//
+//     switch (e.which){
+//     case 37:
+//     //left arrow key, move left!
+//         if (avatarLeft-20 > 0) {
+//         $("#avatar").finish().animate({
+//               left: "-=5"
+//         });
+//       }
+//         break;
+//
+//     case 39:
+//     //right arrow key, move right!
+//         if (avatarLeft+5 < 290) {
+//         $("#avatar").finish().animate({
+//             left: "+=5"
+//         });
+//       }
+//         break;
+//       }
+//     });
+//
+//
+//
+//
+//       if (keyIsDown(this.leftArrow)) {
+//         this.vx = -this.speed;
+//       }
+//       else if (keyIsDown(this.rightArrow)) {
+//         this.vx = this.speed;
+//       }
+//       else {
+//         this.vx = 0;
+//       }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//   }
+//
+//   function spawnEnemy() {
+//     let enemyX = Math.floor(Math.random()*160)+260;
+//     enemy.push(new Enemy(enemyX,0,15,true,10));
+//     setTimeout(spawnEnemy,500)
+//   }

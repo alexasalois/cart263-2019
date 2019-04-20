@@ -13,12 +13,18 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 
+  <script src="js/libraries/p5.dom.js"></script>
+  <script src="js/libraries/p5.min.js"></script>
+  <script src="js/libraries/p5.dom.min.js"></script>
+
   <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
   <script
   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
   <script src="js/musicplayer-min.js"></script>
+
+  <script src="js/enemy.js"></script>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Neucha|Open+Sans+Condensed:300" rel="stylesheet">
@@ -52,7 +58,7 @@
 
   <div id="stats"></div>
 
-  <input type="text" id="textInput" value="">
+  <input type="text" id="textInput" value="" placeholder="Comment your opinion about stuff. idk. express yourself?">
 
   <button onclick="checkWords()"id="postBtn">Post</button>
 
@@ -70,7 +76,7 @@
   <div id="sidebar">
     <ul id="sections">
       <li>
-        <p>News Feed</p>
+        <p>Profile</p>
       </li>
 
       <li>

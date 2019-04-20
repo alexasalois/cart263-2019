@@ -237,3 +237,11 @@ ul {
 
   margin: 200px auto 0;
 }
+
+#enemy {
+  position: absolute;
+  background-color: red;
+  width: 20px;
+  height: 30px;
+  z-index: 4567890;
+}
