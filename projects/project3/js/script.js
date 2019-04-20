@@ -433,7 +433,7 @@ function negativeResponse() {
 }
 
 function updateLove() {
-  if (loveCounter > 5) {
+  if (loveCounter > 5 && loveCounter < 10) {
     friends = friends*2;
     ranking = 1;
     numberOfComments = numberOfComments*2;
@@ -447,6 +447,14 @@ function updateLove() {
     friends = 0;
     alert("Think before you type. You don't know who could be listening. ")
   }
+
+  if (loveCounter >= 10) {
+    friends = 9999999999999999;
+    influence = 9999999999999999;
+    $("#textInput").val('POSITIVE POSITIVE POSITIVE POSITIVE POSITIVE POSITIVE POSITIVE POSITIVE POSITIVE');
+    alert("POSITIVITY! It's what the people want.")
+  }
+
 }
 
 function playMusic() {
