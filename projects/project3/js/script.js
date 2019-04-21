@@ -224,9 +224,6 @@ let $negativeComments = [
 $(document).ready(function() {
   $("#mainpage").css("display","none");
   $("#btnConnect").on("click",login);
-//  $("#textInput").autocomplete({
-//    source: $availableWords
-  //});
 });
 
 function login() {
@@ -283,25 +280,21 @@ function checkWords() {
           // if it's positive verb, count it as plus one
           case $availablePositiveVerbs[cpt].toLowerCase():
             positiveVerb+=1;
-            console.log("1");
           break;
 
           // if it's negative verb, count it as a negative plus one
           case $availableNegativeVerbs[cpt].toLowerCase():
             negativeVerb+=1;
-            console.log("2");
           break;
 
           // if it's positive word, plus one
           case $availablePositiveWords[cpt].toLowerCase():
             positiveWord+=1;
-            console.log("3");
           break;
 
           // if it's negative word, plus one
           case $availableNegativeWords[cpt].toLowerCase():
             negativeWord+=1;
-            console.log("4");
           break;
         }
       }
@@ -373,7 +366,7 @@ function checkLove() {
 function positiveResponse() {
   friends = friends+50;
 
-  if (ranking-100 > 1) {
+  if (ranking-10500 > 1) {
     ranking = ranking-10500;
   }
 
@@ -409,7 +402,6 @@ function negativeResponse() {
   ranking = ranking+500;
   influence = influence-50;
 
-  console.log(friends);
   displayStats();
 
 
@@ -437,25 +429,51 @@ function updateLove() {
     friends = friends*2;
     ranking = 1;
     numberOfComments = numberOfComments*2;
-    alert("Wow! Top Influencer! Nice!");
+    alert("Wow! One of the top influencers! Nice!");
   }
 
-  else if (loveCounter < -5) {
-    console.log(loveCounter);
-    numberOfComments = numberOfComments*5;
-    ranking = 999999999999999999999;
-    friends = 0;
-    alert("Think before you type. You don't know who could be listening. ")
-  }
-
-  if (loveCounter >= 10) {
+  else if (loveCounter >= 10 && loveCounter < 15) {
+    loveCounter+=1;
     friends = 9999999999999999;
     influence = 9999999999999999;
     $("#textInput").val('POSITIVE POSITIVE POSITIVE POSITIVE POSITIVE POSITIVE POSITIVE POSITIVE POSITIVE');
     alert("POSITIVITY! It's what the people want.")
   }
 
+  else if (loveCounter >= 15) {
+    console.log("hello?")
+    $("#textInput").remove();
+    $( "#postBtn" ).on( "click", distortedPositivity);
+  }
+
+  if (loveCounter < -5 && loveCounter > -10) {
+    loveCounter-=1;
+    numberOfComments = numberOfComments*5;
+    ranking = 999999999999;
+    friends = 0;
+    $("#textInput").val('YOU SHOULD BE ASHAMED.');
+    alert("Think before you type. You don't know who could be listening. ");
+  }
+
+  if (loveCounter <= -10) {
+    numberOfComments = numberOfComments*10;
+    $("#textInput").remove();
+    $( "#postBtn" ).on( "click", distortedNegativity);
+  }
 }
+
+function distortedPositivity() {
+  $blogPost = "<div class='posts'>p o s i t i v i t y</div>";
+  alert("willful ignorance (noun): Making the conscious decision to deny facts and reality because you have such a fragile ego that if you admit you are wrong your whole world would implode in a fiery mess of gore." )
+  $("#blogPosts").prepend($blogPost);
+}
+
+function distortedNegativity() {
+  $blogPost = "<div class='posts'>i s  t h i s  o f f e n s i v e ?</div>";
+  alert("Politically Correct (expression): A method of controlling and dictating public speech and thought. A powerful form of censorship.");
+  $("#blogPosts").prepend($blogPost);
+}
+
 
 function playMusic() {
   // play and display songs
