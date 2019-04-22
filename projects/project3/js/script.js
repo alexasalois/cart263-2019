@@ -224,6 +224,7 @@ let $negativeComments = [
 $(document).ready(function() {
   $("#mainpage").css("display","none");
   $("#btnConnect").on("click",login);
+  $("#avatar").css("display","none");
 });
 
 function login() {
@@ -548,7 +549,7 @@ function playMusic() {
 function startMiniGame() {
   $("#playGame").on("click", function(){
     $("#playGame").remove();
-    $("#miniGame").append(avatar);
+    $("#avatar").css("display","block");
     moveAvatar();
   });
   }
