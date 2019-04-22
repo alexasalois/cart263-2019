@@ -221,6 +221,7 @@ let $negativeComments = [
   "how the hell could you even say that???"
 ]
 
+// when the document gets ready, show login screen, hide the game and main page
 $(document).ready(function() {
   $("#mainpage").css("display","none");
   $("#btnConnect").on("click",login);
@@ -235,6 +236,7 @@ function login() {
     $("#mainpage").css("display","block");
     $("#login").css("display","none");
 
+    // main events displaying the stats, showing the name, offering music and mini game established
     displayStats();
     displayName();
     playMusic();
@@ -264,6 +266,7 @@ function displayStats() {
   }
 }
 
+// various alert messages when clicking around the left sidebar
 function alertMessages() {
   alert("Uh-oh! Looks like you have no friends who want to talk to you in real life. Whoops!");
 }
@@ -322,7 +325,7 @@ function checkWords() {
     }
 
     // after checking the value of the words, generate the post
-    // check if sentence is negative or positive!
+    // check if sentence is negative or positive! depending on the combination, connotation will differ
     if (negativeVerb >= 1 && positiveWord >=1) {
       negative+=1;
     }
@@ -392,10 +395,13 @@ function positiveResponse() {
     ranking = ranking-10500;
   }
 
+  // adjust the influence: popularity is gaining
   influence = influence+50;
 
+  // update the stats
   displayStats();
 
+  // choose a random number of comments between 3 and 5
   let numberOfComments = Math.floor(Math.random()*3)+2;
   let positivePosts;
   let positionTop;
@@ -410,6 +416,7 @@ function positiveResponse() {
    positionTop = Math.floor(Math.random()*700)+0;
    positionLeft = Math.floor(Math.random()*1250)+0;
 
+   // display the comments from your friends randomly
    $("#comment"+i).css("top", positionTop);
    $("#comment"+i).css("left", positionLeft);
  }
@@ -421,12 +428,14 @@ function negativeResponse() {
     friends = friends - 20;
   }
 
+  // update rankings: not going great
   ranking = ranking+500;
   influence = influence-50;
 
+  // update the stats
   displayStats();
 
-
+  // choose a random number of comments between 3 and 5
   numberOfComments = Math.floor(Math.random()*3)+2;
   let negativePosts;
   let positionTop;
@@ -447,6 +456,7 @@ function negativeResponse() {
 }
 
 function updateLove() {
+  // gaining popularity: more people are listening...
   if (loveCounter > 5 && loveCounter < 10) {
     friends = friends*2;
     ranking = 1;
@@ -455,6 +465,7 @@ function updateLove() {
   }
 
   else if (loveCounter >= 10 && loveCounter < 15) {
+    // "brainwashing" society
     loveCounter+=1;
     friends = 9999999999999999;
     influence = 9999999999999999;
@@ -463,11 +474,13 @@ function updateLove() {
   }
 
   else if (loveCounter >= 15) {
+    // "positive" ending
     $("#textInput").remove();
     $( "#postBtn" ).on( "click", distortedPositivity);
   }
 
   if (loveCounter < -5 && loveCounter > -10) {
+    // reputation is getting bad, so you get warned...
     loveCounter-=1;
     numberOfComments = numberOfComments*5;
     ranking = 999999999999;
@@ -477,6 +490,7 @@ function updateLove() {
   }
 
   if (loveCounter <= -10) {
+    // if your reputation is very low, negative ending!
     numberOfComments = numberOfComments*10;
     $("#textInput").remove();
     $( "#postBtn" ).on( "click", distortedNegativity);
@@ -484,12 +498,14 @@ function updateLove() {
 }
 
 function distortedPositivity() {
+  // "happy" ending: being fake got you popular
   $blogPost = "<div class='posts'>p o s i t i v i t y</div>";
   alert("willful ignorance (noun): Making the conscious decision to deny facts and reality because you have such a fragile ego that if you admit you are wrong your whole world would implode in a fiery mess of gore." )
   $("#blogPosts").prepend($blogPost);
 }
 
 function distortedNegativity() {
+  // negative ending: everyone hates you :c
   $blogPost = "<div class='posts'>i s  t h i s  o f f e n s i v e ?</div>";
   alert("Politically Correct (expression): A method of controlling and dictating public speech and thought. A powerful form of censorship.");
   $("#blogPosts").prepend($blogPost);
@@ -522,31 +538,8 @@ function playMusic() {
    });
 }
 
-//
-// function setup() {
-//   let canvas = createCanvas(320, 250);
-//   canvas.parent("#miniGame");
-//   background(255, 0, 200);
-//   let avatar = new Avatar(width/2,height-35,45,75,10,LEFT_ARROW,RIGHT_ARROW,10);
-// }
-//
-// function draw() {
-//   avatar.display();
-//
-//   avatar.moveAvatar();
-//   avatar.handleInput();
-//
-//   spawnEnemy();
-//
-//   for (let i=0; i< enemy.length; i++) {
-//     enemy[i].display();
-//     enemy[i].updateEnemy();
-//     enemy[i].handleCollision(avatar);
-//     enemy[i].isOffScreen();
-//   }
-// }
-
 function startMiniGame() {
+  // when the play button is clicked, mini game starts
   $("#playGame").on("click", function(){
     $("#playGame").remove();
     $("#avatar").css("display","block");
@@ -557,31 +550,36 @@ function startMiniGame() {
 function moveAvatar() {
 let avatarLeft = $("#avatar").position().left;
 let avatarTop = $("#avatar").position().top;
-console.log($("#avatar").position().left);
 
-
+  // controls of the avatar
   $(document).keydown(function(e){
     switch (e.which){
-    case 37:    //left arrow key
+    case 37:
+        // go left
         if (avatarLeft > 0 && avatarLeft < 320) {
+        console.log(avatarLeft);
         $("#avatar").finish().animate({
             left: "-=50"
         });
-      }
-
+        }
         break;
 
-    case 38:    //up arrow key
+    case 38:
+        // go up
         $("#avatar").finish().animate({
             top: "-=50"
         });
         break;
-    case 39:    //right arrow key
+
+    case 39:
+        // go right
         $("#avatar").finish().animate({
             left: "+=50"
         });
         break;
-    case 40:    //bottom arrow key
+
+    case 40:
+        // go down
         $("#avatar").finish().animate({
             top: "+=50"
         });
