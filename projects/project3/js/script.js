@@ -533,31 +533,33 @@ function startMiniGame() {
   $("#playGame").on("click", function(){
     $("#playGame").remove();
     $("#avatar").prepend();
+    moveAvatar();
   });
   }
 
 function moveAvatar() {
   $(document).keydown(function(e){
-    let avatarLeft = $("#avatar").position().left;
-
     switch (e.which){
-    case 37:
-    //left arrow key, move left!
-        if (avatarLeft-20 > 0) {
+    case 37:    //left arrow key
         $("#avatar").finish().animate({
-              left: "-=5"
+            left: "-=50"
         });
-      }
         break;
-
-    case 39:
-    //right arrow key, move right!
-        if (avatarLeft+5 < 290) {
+    case 38:    //up arrow key
         $("#avatar").finish().animate({
-            left: "+=5"
+            top: "-=50"
         });
-      }
         break;
-      }
-    });
-  }
+    case 39:    //right arrow key
+        $("#avatar").finish().animate({
+            left: "+=50"
+        });
+        break;
+    case 40:    //bottom arrow key
+        $("#avatar").finish().animate({
+            top: "+=50"
+        });
+        break;
+    }
+});
+}
