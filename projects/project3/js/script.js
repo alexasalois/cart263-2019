@@ -263,6 +263,10 @@ function displayStats() {
   }
 }
 
+function alertLinks() {
+  alert("Uh-oh! Looks like you have no friends, invites or part of any group. You'll never be satisfied with your ranking and you will always want to buy more stuff, what's the point?");
+}
+
 // function that suggests the available words and checks all the words to make sure it is okay to post
 function checkWords() {
   $approvedWords = 0;
@@ -501,29 +505,29 @@ function playMusic() {
    });
 }
 
-
-function setup() {
-  let canvas = createCanvas(320, 250);
-  canvas.parent("#miniGame");
-  background(255, 0, 200);
-  let avatar = new Avatar(width/2,height-35,45,75,10,LEFT_ARROW,RIGHT_ARROW,10);
-}
-
-function draw() {
-  avatar.display();
-
-  avatar.moveAvatar();
-  avatar.handleInput();
-
-  spawnEnemy();
-
-  for (let i=0; i< enemy.length; i++) {
-    enemy[i].display();
-    enemy[i].updateEnemy();
-    enemy[i].handleCollision(avatar);
-    enemy[i].isOffScreen();
-  }
-}
+//
+// function setup() {
+//   let canvas = createCanvas(320, 250);
+//   canvas.parent("#miniGame");
+//   background(255, 0, 200);
+//   let avatar = new Avatar(width/2,height-35,45,75,10,LEFT_ARROW,RIGHT_ARROW,10);
+// }
+//
+// function draw() {
+//   avatar.display();
+//
+//   avatar.moveAvatar();
+//   avatar.handleInput();
+//
+//   spawnEnemy();
+//
+//   for (let i=0; i< enemy.length; i++) {
+//     enemy[i].display();
+//     enemy[i].updateEnemy();
+//     enemy[i].handleCollision(avatar);
+//     enemy[i].isOffScreen();
+//   }
+// }
 
 function startMiniGame() {
   $("#playGame").on("click", function(){
@@ -532,33 +536,27 @@ function startMiniGame() {
   }
 
 function moveAvatar() {
-  // $(document).keydown(function(e){
-  //   let avatarLeft = $("#avatar").position().left;
-  //
-  //   switch (e.which){
-  //   case 37:
-  //   //left arrow key, move left!
-  //       if (avatarLeft-20 > 0) {
-  //       $("#avatar").finish().animate({
-  //             left: "-=5"
-  //       });
-  //     }
-  //       break;
-  //
-  //   case 39:
-  //   //right arrow key, move right!
-  //       if (avatarLeft+5 < 290) {
-  //       $("#avatar").finish().animate({
-  //           left: "+=5"
-  //       });
-  //     }
-  //       break;
-  //     }
-  //   });
-  }
+  $(document).keydown(function(e){
+    let avatarLeft = $("#avatar").position().left;
 
-  function spawnEnemy() {
-    let enemyX = Math.floor(Math.random()*160)+260;
-    enemy.push(new Enemy(enemyX,0,15,true,10));
-    setTimeout(spawnEnemy,500)
+    switch (e.which){
+    case 37:
+    //left arrow key, move left!
+        if (avatarLeft-20 > 0) {
+        $("#avatar").finish().animate({
+              left: "-=5"
+        });
+      }
+        break;
+
+    case 39:
+    //right arrow key, move right!
+        if (avatarLeft+5 < 290) {
+        $("#avatar").finish().animate({
+            left: "+=5"
+        });
+      }
+        break;
+      }
+    });
   }
