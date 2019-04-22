@@ -548,17 +548,19 @@ function startMiniGame() {
   }
 
 function moveAvatar() {
-let avatarLeft = $("#avatar").position().left;
-let avatarTop = $("#avatar").position().top;
+let avatarLeft;
+let avatarTop;
 
   // controls of the avatar
   $(document).keydown(function(e){
     switch (e.which){
     case 37:
         // go left
-        console.log(avatarLeft);
+        // check position
+        avatarLeft = $("#avatar").position().left;
 
-        if (avatarLeft >= 0) {
+        // if within the boundaries: move
+        if (avatarLeft-50 >= 0) {
         $("#avatar").finish().animate({
             left: "-=50"
         });
@@ -567,9 +569,14 @@ let avatarTop = $("#avatar").position().top;
 
     case 38:
         // go up
+        //check position
+        avatarTop = $("#avatar").position().top;
+
+        if (avatarTop-50 >= 0) {
         $("#avatar").finish().animate({
             top: "-=50"
         });
+        }
         break;
 
     case 39:
