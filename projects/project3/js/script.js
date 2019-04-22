@@ -263,8 +263,24 @@ function displayStats() {
   }
 }
 
-function alertLinks() {
-  alert("Uh-oh! Looks like you have no friends, invites or part of any group. You'll never be satisfied with your ranking and you will always want to buy more stuff, what's the point?");
+function alertMessages() {
+  alert("Uh-oh! Looks like you have no friends who want to talk to you in real life. Whoops!");
+}
+
+function alertGroups() {
+  alert("Awww, you are not part of any groups. Looking for attention isn't really a squad.");
+}
+
+function alertEvents() {
+  alert("No plans for you this weekend. Well actually, nothing you were invited to.");
+}
+
+function alertMarketplace() {
+  alert("I don't think you need to buy stuff again. Always want more, never enough, isn't it?");
+}
+
+function alertRanking() {
+  alert("No matter what the ranking is V.S. your other followers, I don't think you'll ever be satisfied.");
 }
 
 // function that suggests the available words and checks all the words to make sure it is okay to post
@@ -532,7 +548,7 @@ function playMusic() {
 function startMiniGame() {
   $("#playGame").on("click", function(){
     $("#playGame").remove();
-    $("#avatar").prepend();
+    $("#miniGame").append(avatar);
     moveAvatar();
   });
   }
