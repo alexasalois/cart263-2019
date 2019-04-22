@@ -555,13 +555,22 @@ function startMiniGame() {
   }
 
 function moveAvatar() {
+let avatarLeft = $("#avatar").position().left;
+let avatarTop = $("#avatar").position().top;
+console.log($("#avatar").position().left);
+
+
   $(document).keydown(function(e){
     switch (e.which){
     case 37:    //left arrow key
+        if (avatarLeft > 0 && avatarLeft < 320) {
         $("#avatar").finish().animate({
             left: "-=50"
         });
+      }
+
         break;
+
     case 38:    //up arrow key
         $("#avatar").finish().animate({
             top: "-=50"
