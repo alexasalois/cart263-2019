@@ -226,6 +226,8 @@ $(document).ready(function() {
   $("#mainpage").css("display","none");
   $("#btnConnect").on("click",login);
   $("#avatar").css("display","none");
+  $("#score").css("display","none");
+  $("#gameInstructions").css("display","none");
 });
 
 function login() {
@@ -543,6 +545,9 @@ function startMiniGame() {
   $("#playGame").on("click", function(){
     $("#playGame").remove();
     $("#avatar").css("display","block");
+    $("#gameInstructions").css("display","block");
+    $("#score").css("display","block");
+
     moveAvatar();
   });
   }
@@ -581,16 +586,26 @@ let avatarTop;
 
     case 39:
         // go right
+        // check position
+        avatarLeft = $("#avatar").position().left;
+
+        if (avatarLeft-50 < 180) {
         $("#avatar").finish().animate({
             left: "+=50"
         });
+        }
         break;
 
     case 40:
         // go down
+        // check position
+        avatarTop = $("#avatar").position().top;
+
+        if (avatarTop-50 < 110) {
         $("#avatar").finish().animate({
             top: "+=50"
         });
+        }
         break;
     }
 });

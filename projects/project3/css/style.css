@@ -235,3 +235,17 @@ ul {
   background-color: black;
   z-index: 2;
 }
+
+#gameInstructions {
+  position: absolute;
+  text-align: center;
+  top: 100px;
+  font-family: "Neucha", cursive;
+  font-size: 20px;
+}
+
+#score {
+  position: absolute;
+  text-align: left;
+  z-index: 9999;
+}
