@@ -31,13 +31,12 @@
   <link href="https://fonts.googleapis.com/css?family=Neucha|Open+Sans+Condensed:300" rel="stylesheet">
 
   <!-- My script(s) -->
-  <script src="js/enemy.js"></script>
-  <script src"js/avatar.js"></script>
   <script src="js/script.js"></script>
 </head>
 
 <body>
 
+<!-- First screen, logging in -->
 <div id = "login">
   <div id= "form">
     <div>
@@ -54,17 +53,20 @@
   </div>
 </div>
 
+<!-- Main text of the page: Welcome! -->
 <div id= "mainpage">
   <h3>Koubs@f</h3>
   <h4 id= "welcomeMessage"></h4>
   <h6>What's on your mind?</h6>
 
+  <!-- Stats at the top of the page displaying your influence -->
   <div id="stats"></div>
 
+  <!-- The input box along with the button to push your result into the posts div -->
   <input type="text" id="textInput" value="" placeholder="Comment your opinion about stuff. idk. express yourself?">
-
   <button onclick="checkWords()"id="postBtn">Post</button>
 
+  <!-- The cute colourful decorations -->
   <div class="widgets">
     <div id="widget1"></div>
     <div id="widget2"></div>
@@ -72,10 +74,13 @@
     <div id="widget4"></div>
   </div>
 
+  <!-- The stuff you post are all stored here -->
   <div id="blogPosts"></div>
 
+  <!-- Your friends' reactions: -->
   <div id="comments"></div>
 
+  <!-- Left sidebar with options of interactions around the site -->
   <div id="sidebar">
     <ul id="sections">
       <li>
@@ -105,14 +110,15 @@
     </ul>
   </div>
 
+  <!-- List all the songs as links to play and choose your music -->
   <div class="music">
     <h4>Trending Tunes!</h4>
     <audio src="" controls id="audioPlayer"></audio>
 
       <ul class id="playlist">
-        <li data-artist="Artist-1">
+      <li data-artist="Artist-1">
         <a href="assets/sounds/standbyme.mp3">1. Stand by Me</a>
-        </li>
+      </li>
 
       <li data-artist="Artist-2">
         <a href="assets/sounds/aslongasyouloveme.mp3">2. As Long As You Love Me</a>
@@ -141,6 +147,7 @@
     </ul>
   </div>
 
+<!-- Mini game of the browser page, in its own div -->
 <div id="miniGame">
   <h5>Mini-Game of the Month!</h5>
   <button id="playGame" type="button">PLAY</button>

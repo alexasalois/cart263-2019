@@ -556,8 +556,9 @@ let avatarTop = $("#avatar").position().top;
     switch (e.which){
     case 37:
         // go left
-        if (avatarLeft > 0 && avatarLeft < 320) {
         console.log(avatarLeft);
+
+        if (avatarLeft >= 0) {
         $("#avatar").finish().animate({
             left: "-=50"
         });
