@@ -237,7 +237,7 @@ function login() {
     displayStats();
     displayName();
     playMusic();
-  //  startMiniGame();
+    startMiniGame();
   }
 }
 
@@ -532,6 +532,7 @@ function playMusic() {
 function startMiniGame() {
   $("#playGame").on("click", function(){
     $("#playGame").remove();
+    $("#avatar").prepend();
   });
   }
 
